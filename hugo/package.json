@@ -1,0 +1,20 @@
+{
+  "name": "abertschi.ch",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "js-beautify": "^1.14.2"
+  },
+  "scripts": {
+    "test": "npm run beautify",
+    "beautify": "js-beautify layouts/**/*.html -r"
+  },
+
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  }
+}

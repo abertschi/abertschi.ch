@@ -1,0 +1,8 @@
+<a class="nav-entry" href="{{ "/" | relURL }}">HOME</a>
+{{ range .Site.Menus.main }}
+<a class="nav-entry" href="{{ .URL }}">{{ .Name }}</a>
+{{ end }}
+{{ with .Site.GetPage "/blog" }}
+<a class="nav-entry" href="{{ "/blog" | relURL }}">BLOG</a>
+<a class="nav-entry" href="{{ "/cv.pdf" | relURL }}">CV</a>
+{{ end }}

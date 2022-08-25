@@ -1,0 +1,7 @@
+{{ define "main" }}
+{{if os.FileExists "/layouts/index.gen.html" }}
+{{readFile "/layouts/index.gen.html" | safeHTML }}
+{{else}}
+Generate /layouts/index.gen.html
+{{ end }}
+{{ end }}
