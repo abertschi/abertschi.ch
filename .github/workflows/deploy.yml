@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency: 
-  group: ${{ github.head_ref }}
+  group: ${{ github.workflow }}
   cancel-in-progress: true
  
 name: Build and Publish abertschi.ch
