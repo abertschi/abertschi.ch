@@ -17,22 +17,36 @@ jobs:
       with:
         node-version: '12.x'
         
-    - name: Build Project
+    - name: Build webapp
       run: |
-        make webapp/init
+        make webapp/setup
         make webapp/build
+     
+    - name: Build hugo
+      run: |
         make hugo/build
-        
-    - name: List output files
-      run: ls -al
       
-   # - name: deploy
-    #  uses: SamKirkland/FTP-Deploy-Action@2.0.0
-    #  env:
-    #    FTP_SERVER: ${{ secrets.FTP_SERVER }}
-     #   FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-    #    FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-     #   LOCAL_DIR: build
-     #   METHOD: sftp
-      #  PORT: 22
-     #   ARGS: --delete
+    - name: List output files
+      run: |
+        ls -al
+        ls -al ./public
+        git status
+    
+      # sftp action fails with dirty files in repo
+      # we must reset these files
+      # modified:   app/frontend/package-lock.json
+      # modified:   hugo/layouts/index.gen.html
+      # this works because ./public is not in git index
+    - name: Prepare SFTP
+      run: |
+        git reset --hard
+
+    - name: deploy
+      if: github.ref == 'refs/heads/master'
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      with:  
+        ftp-server: ${{ secrets.server }} 
+        ftp-username: ${{ secrets.username }} 
+        ftp-password: ${{ secrets.password }}
+        local-dir: public
+        git-ftp-args: --insecure
