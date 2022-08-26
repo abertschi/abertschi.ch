@@ -39,6 +39,4 @@ jobs:
         ftp-server: ${{ secrets.server }} 
         ftp-username: ${{ secrets.username }} 
         ftp-password: ${{ secrets.password }}
-        protocol: sftp
         local-dir: ./public/
-        dry-run: true
