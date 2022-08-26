@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:    
+      - master
+      
+  workflow_dispatch:
+  
+name: Build and Publish abertschi.ch
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+        
+    - name: Build Project
+      run: |
+        make webapp/init
+        make webapp/build
+        make hugo/build
+        
+    - name: List output files
+      run: ls -al
+      
+   # - name: deploy
+    #  uses: SamKirkland/FTP-Deploy-Action@2.0.0
+    #  env:
+    #    FTP_SERVER: ${{ secrets.FTP_SERVER }}
+     #   FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+    #    FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+     #   LOCAL_DIR: build
+     #   METHOD: sftp
+      #  PORT: 22
+     #   ARGS: --delete
