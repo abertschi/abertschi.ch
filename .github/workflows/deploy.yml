@@ -37,7 +37,7 @@ jobs:
         server: ${{ secrets.server }} 
         username: ${{ secrets.username }} 
         password: ${{ secrets.password }}
-        protocol: sftp
+        protocol: ftps
         port: 5544
         server-dir: ./test
         local-dir: ./public
