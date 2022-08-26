@@ -4,8 +4,12 @@ on:
       - master
       
   workflow_dispatch:
-  
-name: Build and Publish abertschi.ch
+
+concurrency: 
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+ 
+name: build-and-deploy
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
