@@ -48,5 +48,5 @@ jobs:
         ftp-server: ${{ secrets.server }} 
         ftp-username: ${{ secrets.username }} 
         ftp-password: ${{ secrets.password }}
-        local-dir: ./public/
+        local-dir: public
         git-ftp-args: --insecure
