@@ -1,14 +1,14 @@
-concurrency: 
-  group: ${{ github.head_ref }}
-  cancel-in-progress: true
-
 on:
   push:
     branches:    
       - master
       
   workflow_dispatch:
-  
+
+concurrency: 
+  group: ${{ github.head_ref }}
+  cancel-in-progress: true
+ 
 name: Build and Publish abertschi.ch
 jobs:
   build-and-deploy:
