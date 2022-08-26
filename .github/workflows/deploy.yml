@@ -34,13 +34,11 @@ jobs:
 
     - name: deploy
       if: github.ref == 'refs/heads/master'
-      uses: SamKirkland/FTP-Deploy-Action@4.3.1
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:  
-        server: ${{ secrets.server }} 
-        username: ${{ secrets.username }} 
-        password: ${{ secrets.password }}
-        protocol: ftps
-        port: 5544
-        server-dir: ./test/
+        ftp-server: ${{ secrets.server }} 
+        ftp-username: ${{ secrets.username }} 
+        ftp-password: ${{ secrets.password }}
+        protocol: sftp
         local-dir: ./public/
         dry-run: true
