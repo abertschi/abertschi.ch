@@ -19,7 +19,7 @@ jobs:
         
     - name: Build Project
       run: |
-        make webapp/init
+        make webapp/setup
         make webapp/build
         make hugo/build
         
