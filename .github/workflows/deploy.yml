@@ -39,6 +39,6 @@ jobs:
         password: ${{ secrets.password }}
         protocol: ftps
         port: 5544
-        server-dir: ./test
-        local-dir: ./public
+        server-dir: ./test/
+        local-dir: ./public/
         dry-run: true
