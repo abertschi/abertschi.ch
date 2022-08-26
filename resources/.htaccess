@@ -1,0 +1,23 @@
+# Turn off indexing of files and directories.
+Options -Indexes
+
+# Turn on rewrites.
+RewriteEngine on
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Don't apply to URLs that go to existing files or folders.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Only apply to URLs that aren't already in the subdirectory.
+RewriteCond %{REQUEST_URI} !^/app/
+
+# Rewrite all those to insert the subdirectory name.
+RewriteRule ^(.*)$ /app/$1 [L]
+
+# Redirect the root folder.
+RewriteCond %{HTTP_HOST} ^(www.)?abertschi.ch$
+RewriteRule ^(/)?$ /app/index.html [L]

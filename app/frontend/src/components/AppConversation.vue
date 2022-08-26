@@ -9,7 +9,8 @@
               class='text-input'
               id='user-input-text'
               v-model="inputText"
-              placeholder="and more ..."></textarea>
+              :placeholder="inputTextPlaceholder"
+              ></textarea>
   </div>
   <div class='text-bottom-margin'></div>
 </template>
@@ -47,11 +48,14 @@ export default defineComponent({
     window.addEventListener('click', this.skipTyping);
     window.addEventListener('touchend', this.skipTyping);
     window.addEventListener("keypress", this.skipTyping);
+
+    this._placeholderHintAnimation()
     this.doTyping()
   },
 
   data() {
     return {
+      inputTextPlaceholder: 'and more ' as string,
       inputText: '' as string,
       showInput: false,
       stop: false,
@@ -138,6 +142,13 @@ export default defineComponent({
         document.getElementById(container)!.innerHTML = ''
       }
       return rows
+    },
+    _placeholderHintAnimation() {
+      let i = 0
+      let that = this
+      setInterval(() => {
+        that.inputTextPlaceholder="and more " +  '.'.repeat(i++ % 5)
+      }, 1800)
     },
     _createAndInsertLi(containerId: string, data: string = '') {
       let intro = document.getElementById(containerId)
