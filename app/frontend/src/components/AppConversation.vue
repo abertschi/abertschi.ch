@@ -155,6 +155,7 @@ export default defineComponent({
       if (!this.initialDialog) {
         return
       }
+      e.stopPropagation();
       this.clearHtmlData(ID_INTRO, true)
       this.stop = true;
       this.typingBufferIndex = this.typingBuffer.length
@@ -167,7 +168,6 @@ export default defineComponent({
 
       this.showInput = true
       let that = this
-      e.stopPropagation();
       this._onTypingFinished()
       setTimeout(() => {
         that.stop = false
