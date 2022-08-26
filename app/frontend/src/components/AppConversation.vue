@@ -17,8 +17,8 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import {Vue} from "vue-class-component";
-import CmdHandler from "@/CmdHandler";
-import PersistenceService from "@/PersistenceService";
+import CmdHandler from "@/services/CmdHandler";
+import PersistenceService from "@/services/PersistenceService";
 
 
 const ID_INTRO = 'intro'

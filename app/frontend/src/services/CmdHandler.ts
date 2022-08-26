@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-import DataService, {MessageResponse} from "@/DataService";
+import DataService, {MessageResponse} from "@/services/DataService";
 import {Vue} from "vue-class-component";
-import AppConversation from "@/AppConversation.vue";
 
 interface CmdHandler {
     canHandle(msg: string, vue: Vue): boolean
+
     handle(msg: string, vue: Vue): Promise<CmdHandlerMessageResponse>
 }
 
@@ -115,9 +115,9 @@ class CmdManager {
     }
 
 // eslint-disable-next-line no-unused-vars
-    async handle(msg: string, vue : Vue , ctx: Array<string> = []):
+    async handle(msg: string, vue: Vue, ctx: Array<string> = []):
         Promise<CmdHandlerMessageResponse> {
-        for (const h of this.handlers ) {
+        for (const h of this.handlers) {
             if (h.canHandle(msg, vue)) {
                 return h.handle(msg, vue)
             }

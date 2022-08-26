@@ -9,6 +9,9 @@ set -x
 cd $ROOT_DIR
 npm run build
 
+rm -rf $HUGO_STATIC_ROOT/css
+rm -rf $HUGO_STATIC_ROOT/js
+
 cp -rf $ROOT_DIR/dist/css $HUGO_STATIC_ROOT/
 cp -rf $ROOT_DIR/dist/js $HUGO_STATIC_ROOT/
 

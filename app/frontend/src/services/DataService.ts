@@ -1,5 +1,5 @@
 import axios, {AxiosInstance} from "axios";
-import PersistenceService from "@/PersistenceService";
+import PersistenceService from "@/services/PersistenceService";
 
 const URL = process.env.VUE_APP_BACKEND_HOST + ":" + process.env.VUE_APP_BACKEND_PORT + "/api"
 
