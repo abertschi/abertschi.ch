@@ -11,7 +11,7 @@
               v-model="inputText"
               placeholder="and more ..."></textarea>
   </div>
-  <div style="margin-bottom: 100px"></div>
+  <div class='text-bottom-margin'></div>
 </template>
 
 <script lang="ts">
@@ -443,6 +443,13 @@ ul {
 
   width: 90%;
 
+}
+
+@media ( min-width: 900px ) {
+  /** laptop **/
+  .text-bottom-margin {
+    margin-bottom: 100px
+  }
 }
 
 
