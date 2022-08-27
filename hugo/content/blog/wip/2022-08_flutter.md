@@ -1,43 +1,10 @@
-+++
-title = "Ad-free: Building an audio ad-blocker for Android"
-date = "2022-08-17"
-description = ""
-draft = true
-
-tags = [
-    "android",
-    "engineering"
-]
-+++
-
-This post will cover some of the insights I've gotten while building ad-free, a
-modularized audio ad-blocker for Android I started in 2016. Ad-free is a
-proof-of-concept application to show limitations in the way how audio
-advertisement is implemented on Android. It features a small Kotlin
-application with a plugin-based design and a simplistic user interface.
-<!--more-->
-
 ---
-
-## Introduction
-The Android OS provides powerful mechanisms to intercept and monitor events on
-the system. A notification listener service is an application that can monitor
-calls from the operating system when new notifications are posted or removed.
-Other services such as Accessibility services monitor and enhance
-user-interaction to support impaired users to interact with the device. These
-services typically expose much information about the current user activity on
-the device.
-
-With a proof-of-concept application, I aim to evaluate the expressivity of some
-of these mechanisms in the domain of audio advertisement in popular music players on
-Android.
-
-## The Application
-
-### Notification Listener Service
-
-### Everything is a Plugin
-
+title: "Flutter 101: A simple plant watering reminder."
+description: ""
+draft: true
+date: "2022-08-01"
+tags:
+---
 
 
 Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
