@@ -4,9 +4,7 @@ description: ""
 draft: false
 date: "2022-08-01"
 tags:
-  - engineering
-  - go
-  - typescript
+  - programming
 ---
 TLDR: In this post I write about the conversational chat interface I built
 into the intro page of this website. You can try it out at the root site of
@@ -15,7 +13,7 @@ into the intro page of this website. You can try it out at the root site of
 ---
 
 ## Background
-I finally found the time to add some Easter Eggs to the intro site of my personal website. This is a small project I have wanted to build for a few years but never found the time. The website is a conjunction a static site generator and a self-built intro page. The site works just fine without JavaScript and contains little to almost no styling, inspired [by this ludicrous website](http://bettermotherfuckingwebsite.com/) (which has some fair points).
+I finally found the time to add some Easter Eggs to the intro site of my personal website. This is a small project I have wanted to build for a few years but never found the time. The website is a conjunction a static site generator and a self-built intro page. The site works just fine without JavaScript and contains little styling, inspired [by this ludicrous website](http://bettermotherfuckingwebsite.com/) (which has some fair points) and [this](https://github.com/HermanMartinus/bearblog/).
 
 ## Technology Stack
 To encourage blogging I opt for [Hugo](/), a static site generator to generate HTML based on Markdown. I mainly choose Hugo because of [ox-hugo](https://github.com/kaushalmodi/ox-hugo), an `Org Mode` exporter backend for Hugo, but so far I am still writing this blog post and Markdown and not Org.

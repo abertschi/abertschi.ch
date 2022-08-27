@@ -55,7 +55,7 @@ export default defineComponent({
 
   data() {
     return {
-      inputTextPlaceholder: 'and more ' as string,
+      inputTextPlaceholder: 'and more ...' as string,
       inputText: '' as string,
       showInput: false,
       stop: false,
