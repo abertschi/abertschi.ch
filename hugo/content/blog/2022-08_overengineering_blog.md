@@ -18,7 +18,7 @@ into the intro page of this website. You can try it out at the root site of
 I finally found the time to add some Easter Eggs to the intro site of my personal website. This is a small project I have wanted to build for a few years but never found the time. The website is a conjunction a static site generator and a self-built intro page. The site works just fine without JavaScript and contains little to almost no styling, inspired [by this ludicrous website](http://bettermotherfuckingwebsite.com/) (which has some fair points).
 
 ## Technology Stack
-To encourage blogging I opt for [Hugo](/), a static site generator to generate HTML based on Markdown. I mainly choose Hugo because of [ox-hugo](https://github.com/kaushalmodi/ox-hugo), an `Org Mode` exporter backend for Hugo, but so far I am still writing this blog post and Markdown and not Org.
+To encourage blogging I opt for [Hugo](/), a static site generator to generate HTML based on Markdown. I mainly choose Hugo because of [ox-hugo](https://github.com/kaushalmodi/ox-hugo), an `Org Mode` exporter backend for Hugo, but so far I am still writing this blog post in Markdown and not Org.
 
 
 The intro page at the root of this domain is self-built with `TypeScript`,
