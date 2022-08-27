@@ -34,7 +34,7 @@ The frontend runs with continuous delivery (CD) and builds and deploys itself [u
 SOME THINGS TO DO ON THIS SITE:
 - SEND ME A POSTCARD
 - READ MY BLOG
-- REACH OUT TO ME AT SAYHI@ABERTSCHI.CH
+- REACH OUT TO ME AT SAYHI at ABERTSCHI.CH
 - BROWSE MY CV
 - FOLLOW ME ON GITHUB OR TWITTER
 
