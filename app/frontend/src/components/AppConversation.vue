@@ -49,7 +49,7 @@ export default defineComponent({
     window.addEventListener('touchend', this.skipTyping);
     window.addEventListener("keypress", this.skipTyping);
 
-    this._placeholderHintAnimation()
+    // this._placeholderHintAnimation()
     this.doTyping()
   },
 
