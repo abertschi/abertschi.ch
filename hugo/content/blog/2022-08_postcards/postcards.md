@@ -95,7 +95,7 @@ You find the command-line application on [GitHub](https://github.com/abertschi/p
 ### Receiving Cards from Strangers
 [Postcard-love](https://postcard.abertschi.ch/) is a small web application to
 upload an image and write some text. Cards uploaded on the site are then
-enqueued and sent to my home address using the afremoentioned projects.
+enqueued and sent to my home address using the aforementioned projects.
 
 [![postcards](/blog/2022-08_postcards/postcard-love.png)](https://github.com/abertschi/postcard-love/blob/master/.assets/postcard-love-ui.pdf)
 {{<caption >}} Webapp to send free cards. See more design assets and the source-code
