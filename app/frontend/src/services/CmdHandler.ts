@@ -29,7 +29,7 @@ class CmdManager {
             this.help(),
             this.clear(),
             this.reset(),
-            this.history()
+            // this.history()
         ] as Array<CmdHandler>
     }
 
