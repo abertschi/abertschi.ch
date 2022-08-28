@@ -1,6 +1,7 @@
 ---
 title: "Graalphp: An efficient PHP implementation on GraalVM"
 date: "2020-08-01"
+slug: "building-graalphp"
 description: ""
 draft: false
 toc: true

@@ -1,6 +1,6 @@
 ---
 title: "Overengineering my website with Easter Eggs"
-description: ""
+slug: "overengineering-my-website-with-easter-eggs"
 draft: false
 date: "2022-08-01"
 tags:

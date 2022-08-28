@@ -1,5 +1,9 @@
 {{ define "main" }}
 <content>
+
+  <!-- <br/> -->
+  <!-- I mainly blog about Computer Science related topics. Security, and Software Engineering. -->
+
   {{ if .Data.Singular }}
   <h3 style="margin-bottom:0">Filtering for "{{ .Title }}"</h3>
   <small>
@@ -10,11 +14,11 @@
     {{ range .Pages }}
     <li>
       <span>
-        <!-- <i> -->
-        <time datetime='{{ .Date.Format "2006-01-02" }}' pubdate>
+        <i>
+          <time datetime='{{ .Date.Format "2006-01-02" }}' pubdate>
           {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
         </time>
-        <!-- </i> -->
+        </i>
       </span>
       <a href="{{ .Permalink }}">{{ .Title }}</a>
     </li>
