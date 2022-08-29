@@ -44,7 +44,7 @@ _JSF, EJB, JBoss EAP, JBoss Arquillian, AspectJ_
 
 **Junior Java Engineer, AXA Winterthur**  
 10/2014 - 07/2015    
-Competence Center Java, Fullstack Java EE in scrum projects  
+Competence Center Java, Fullstack Java EE development in scrum projects  
 _Java EE, JavaScript, HTML_
 
 
