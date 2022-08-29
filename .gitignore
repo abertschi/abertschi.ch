@@ -1,5 +1,5 @@
 node_modules
 .idea
-public
+/public
 hugo/layouts/index.gen.html
 /hugo/content/blog/overengineering_blog_video.webm
