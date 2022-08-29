@@ -60,7 +60,7 @@ class DataService {
                     PersistenceService.saveStage(stage)
                 }
                 let entries = [] as Array<MessageEntry>
-                for(const entry of r.data.responses) {
+                for (const entry of r.data.responses) {
                     entries.push({
                         'sentences': entry.sentences || [],
                         'html': entry.html || ''
@@ -81,7 +81,24 @@ class DataService {
     getHistory(): Promise<MessageResponse> {
         return http.get("/history/" + PersistenceService.getCurrentStage())
             .then(r => {
-                return {} as MessageResponse
+                if (r.status == 200) {
+                    let entries = [] as Array<MessageEntry>
+                    let save = r.data.save || true
+                    for (const entry of r.data.responses) {
+                        entries.push({
+                            'sentences': entry.sentences || [],
+                            'html': entry.html || ''
+                        } as MessageEntry)
+                    }
+                    // 'html':
+                    return {
+                        'save': save,
+                        'responses': entries
+
+                    } as MessageResponse
+                } else {
+                    return this._formatErrorResponse(r.status)
+                }
             }, (error) => this._formatErrorResponse(error.status));
     }
 }

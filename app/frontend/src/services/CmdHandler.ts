@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import DataService, {MessageResponse} from "@/services/DataService";
+import DataService, {MessageEntry, MessageResponse} from "@/services/DataService";
 import {Vue} from "vue-class-component";
 
 interface CmdHandler {
@@ -29,7 +29,7 @@ class CmdManager {
             this.help(),
             this.clear(),
             this.reset(),
-            // this.history()
+            this.history()
         ] as Array<CmdHandler>
     }
 
@@ -107,11 +107,20 @@ class CmdManager {
 
             async handle(msg: string, vue: Vue): Promise<CmdHandlerMessageResponse> {
                 // @ts-ignore
-                return that._createSimpleResponse(false, '',
-                    ['It does not do to dwell on dreams and forget to live. -- Albus Dumbledore', '',
-                        'Here is what I remember about your history on this site...'])
+                const introMsg = {
+                    'sentences': ['It does not do to dwell on dreams and forget to live. -- Albus Dumbledore',
+                        '',
+                        'Here is what I remember about your history on this site...']
+                } as MessageEntry
+
+                return DataService.getHistory().then(m => {
+                    return {
+                        'save': m.save || false,
+                        'responses': [introMsg, ...(m.responses || [])]
+                    } as CmdHandlerMessageResponse
+                })
             }
-        }
+        };
     }
 
 // eslint-disable-next-line no-unused-vars
