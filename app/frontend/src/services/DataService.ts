@@ -5,6 +5,7 @@ const URL = process.env.VUE_APP_BACKEND_HOST + ":" + process.env.VUE_APP_BACKEND
 
 const http: AxiosInstance = axios.create({
     baseURL: URL,
+    timeout: 2000,
     headers: {
         "Content-type": "application/json",
     },
@@ -28,7 +29,6 @@ export interface HistoryResponse {
 class DataService {
 
     _formatErrorResponse(status: number) {
-        console.log('error from response', status)
         let s = ''
         if (status) {
             s = `[${status.toString()}]: `
@@ -49,7 +49,6 @@ class DataService {
     }
 
     sendMessage(txt: string, ctx: string[]): Promise<MessageResponse> {
-        console.log(txt)
         return http.post("/message", {
             'ctx': ctx || [],
             'message': txt,
