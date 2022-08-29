@@ -10,7 +10,7 @@
               id='user-input-text'
               v-model="inputText"
               :placeholder="inputTextPlaceholder"
-              ></textarea>
+    ></textarea>
   </div>
   <div class='text-bottom-margin'></div>
 </template>
@@ -27,11 +27,15 @@ const ID_TEXT_INPUT = 'user-input-text'
 const CURSOR_HTML = '<span class="typing">|</span>'
 const LINEBREAK = 'linebreak'
 
-const WAIT_EMPTY_LINE_MS = 500
-const WAIT_LINE_BREAK_MS = 100
-const WAIT_END_OF_LINE_MS = 600
-const WAIT_CHAR = 40
+const DEFAULT_WAIT_EMPTY_LINE_MS = 500
+const DEFAULT_WAIT_LINE_BREAK_MS = 100
+const DEFAULT_WAIT_END_OF_LINE_MS = 600
+const DEFAULT_WAIT_CHAR = 40
 
+let waitEmptyLineMs = DEFAULT_WAIT_EMPTY_LINE_MS
+let waitLineBreakMs = DEFAULT_WAIT_LINE_BREAK_MS
+let waitEndOfLineMs = DEFAULT_WAIT_END_OF_LINE_MS
+let waitChar = DEFAULT_WAIT_CHAR
 
 export default defineComponent({
   name: "AppIntro",
@@ -49,6 +53,7 @@ export default defineComponent({
     window.addEventListener('touchend', this.skipTyping);
     window.addEventListener("keypress", this.skipTyping);
 
+    this._setTypingAnimationDefault()
     // this._placeholderHintAnimation()
     this.doTyping()
   },
@@ -147,7 +152,7 @@ export default defineComponent({
       let i = 0
       let that = this
       setInterval(() => {
-        that.inputTextPlaceholder="and more " +  '.'.repeat(i++ % 5)
+        that.inputTextPlaceholder = "and more " + '.'.repeat(i++ % 5)
       }, 1800)
     },
     _createAndInsertLi(containerId: string, data: string = '') {
@@ -162,8 +167,24 @@ export default defineComponent({
       intro.appendChild(li)
       return li
     },
+    _setTypingAnimationQuick() {
+      waitEmptyLineMs = 0
+      waitLineBreakMs = 0
+      waitEndOfLineMs = 0
+      waitChar = 0
+    },
+    _setTypingAnimationDefault() {
+      waitEmptyLineMs = DEFAULT_WAIT_EMPTY_LINE_MS
+      waitLineBreakMs = DEFAULT_WAIT_LINE_BREAK_MS
+      waitEndOfLineMs = DEFAULT_WAIT_END_OF_LINE_MS
+      waitChar = DEFAULT_WAIT_CHAR
+    },
     skipTyping(e: Event) {
       if (!this.initialDialog) {
+        if (this.isTyping) {
+          this._setTypingAnimationQuick()
+          e.stopPropagation();
+        }
         return
       }
       e.stopPropagation();
@@ -214,6 +235,8 @@ export default defineComponent({
         this._scrollToBottomOfPage()
       }
       this.initialDialog = false
+      this._setTypingAnimationDefault()
+
       let that = this
       setTimeout(() => {
         this.isTyping = false
@@ -307,11 +330,11 @@ export default defineComponent({
 
             onDone()
           }, this.stop ? 0 : this.typeEmptyRow
-              ? WAIT_EMPTY_LINE_MS : this.typeLineBreak
-                  ? WAIT_LINE_BREAK_MS : WAIT_END_OF_LINE_MS)
+              ? waitEmptyLineMs : this.typeLineBreak
+                  ? waitLineBreakMs : waitEndOfLineMs)
         }
 
-      }, this.stop ? 0 : WAIT_CHAR); /* typeChar */
+      }, this.stop ? 0 : waitChar); /* typeChar */
     }
   },
 });

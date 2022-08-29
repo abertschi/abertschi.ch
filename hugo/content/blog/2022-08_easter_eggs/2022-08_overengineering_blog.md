@@ -2,7 +2,7 @@
 title: "Overengineering my website with Easter Eggs"
 slug: "overengineering-my-website-with-easter-eggs"
 draft: false
-date: "2022-08-01"
+date: "2022-08-20"
 tags:
   - programming
 ---

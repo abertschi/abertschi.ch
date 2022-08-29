@@ -3,7 +3,7 @@ title: "Receiving Hundreds of Postcards from the Interwebs"
 slug: "receiving-postcards"
 description: ""
 draft: false
-date: "2020-10-01"
+date: "2022-08-01"
 tags:
   - programming
   - reversing
