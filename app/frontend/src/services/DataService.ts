@@ -5,7 +5,7 @@ const URL = process.env.VUE_APP_BACKEND_HOST + ":" + process.env.VUE_APP_BACKEND
 
 const http: AxiosInstance = axios.create({
     baseURL: URL,
-    timeout: 2000,
+    timeout: 5000,
     headers: {
         "Content-type": "application/json",
     },
