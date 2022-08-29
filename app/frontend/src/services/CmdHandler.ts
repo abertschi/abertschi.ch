@@ -109,8 +109,8 @@ class CmdManager {
                 // @ts-ignore
                 const introMsg = {
                     'sentences': ['It does not do to dwell on dreams and forget to live. -- Albus Dumbledore',
-                        '',
-                        'Here is what I remember about your history on this site...']
+                        'Here is what I remember about your history on this site...',
+                        '<br/>']
                 } as MessageEntry
 
                 return DataService.getHistory().then(m => {
