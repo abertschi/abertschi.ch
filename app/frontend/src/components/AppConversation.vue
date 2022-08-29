@@ -349,7 +349,7 @@ export default defineComponent({
 }
 
 .cmd-intro {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .typing {

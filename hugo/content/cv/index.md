@@ -29,7 +29,7 @@ element analysis, C#, .NET, Eto.forms, Rhinoceros 3D
 
 **Student Teaching Assistant, ETH Zurich**  
 09/2020 - 01/2022      
-_System Security Group,_   
+_System Security Group_   
 _Lecture: System Security (Master), given by Prof. Srdjan Capkun_  
 Involvement includes creating and grading of exercises and mentoring of students
 
