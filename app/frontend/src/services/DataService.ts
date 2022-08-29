@@ -28,7 +28,7 @@ export interface HistoryResponse {
 class DataService {
 
     _formatErrorResponse(status: number) {
-        console.log(status)
+        console.log('error from response', status)
         let s = ''
         if (status) {
             s = `[${status.toString()}]: `
@@ -49,6 +49,7 @@ class DataService {
     }
 
     sendMessage(txt: string, ctx: string[]): Promise<MessageResponse> {
+        console.log(txt)
         return http.post("/message", {
             'ctx': ctx || [],
             'message': txt,
