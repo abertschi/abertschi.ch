@@ -2,7 +2,7 @@
 title = "cv"
 +++
 
-## Eduction
+## Education
 **M.Sc. Computer Science, ETH Zurich**, _2020 - now_  
 _Focus on Secure and Reliable Systems_
 
@@ -33,15 +33,16 @@ Implementation of a browser based tool to annotate and filter sensor data,
 _Web technologies, Vue.js, Vuex_
 
 **Java Engineer, AXA Winterthur**, 08/2015 - 07/2016  
-Java EE Enterprise development for in-house non-life insurance applications   
-_Java EE6, JSF, EJB, JBoss EAP, JBoss Arquillian, AspectJ, Git, Linux_
+Java EE Enterprise development for in-house non-life insurance applications  
+_JSF, EJB, JBoss EAP, JBoss Arquillian, AspectJ_
 
 **Junior Java Engineer, AXA Winterthur,**  10/2014 - 07/2015  
-Competence Center Java, Fullstack Java EE in scrum projects,   
-_Java EE, JavaScript, Html, Git, Linux_
+Competence Center Java, Fullstack Java EE in scrum projects,  
+_Java EE, JavaScript, HTML_
 
 
 **Software Engineering Apprentice, AXA Winterthur**,  08/2010 - 07/2014  
-IBM Mainframe application developer on z/OS TSO/ISPF (2010-2012)    
-Java EE Fullstack with JSF, EJB (2012-2014)  
-_PL/1, JCL, DB2, Java EE_
+IBM Mainframe application developer on z/OS TSO/ISPF with PL/1, JCL (2010-2012)    
+Java EE Fullstack with JSF, EJB (2013-2014)  
+
+[comment]: <> (_PL/1, JCL, DB2, Java EE_)
