@@ -59,7 +59,7 @@ token.has_valid_credentials(username, password)
 recipient = Recipient(prename, lastname, street, place, zip_code)
 sender = Sender(prename, lastname, street, place, zip_code)
 
-picture=picture_stream=open('./my-photo.jpg', 'rb')
+picture = open('./my-photo.jpg', 'rb')
 card = Postcard(message, recipient, sender, picture)
 
 w = PostcardCreator(token)
@@ -102,16 +102,9 @@ enqueued and sent to my home address using the aforementioned projects.
 [here](https://github.com/abertschi/postcard-love/blob/master/.assets/postcard-love-ui.pdf).{{<
 /caption >}}
 
-From cute cat pictures, landscape and architecture, obscure images, selfies, and
-even a request for date, I received many postcard. 
+<!-- I integrated nudity detection to exclude inappropriate content to be sent out.  -->
 
-> A smile is happiness you'll find right under your nose.  
-> -- Tom Wilson
-
-Thank you everyone for playing along and making me, the postman or my roommates
-smile.
-
-### Shout Out to Ahramov
+## Shout Outs
 
 I want to shout out to _truck driver Ahramov_. Whether you are real or not,
 thanks for the message! I hope the _gud truck_ still drives :).
@@ -123,6 +116,43 @@ zis is se truck in se uzbekiztan. itz not mi truck but gud truck frm the sovjet,
 
 ![postcards](/blog/2022-08_postcards/truck.jpg)
 {{<caption >}} truck drivr ahramov's truck.{{< /caption >}}
+
+
+Also a shout out to this gentleman, who took corona measures very cautionarily
+:). Thanks for all the love, stay healthy!
+
+```
+Love your stuff. 
+Stay corona-free! (That's me in the pic FYI lol)
+```
+
+![postcards](/blog/2022-08_postcards/card.png)
+{{<caption >}} Stay healthy and strong.{{< /caption >}}
+
+
+And last but not least, a warm thanks for this picture. It's a nice wall :).
+
+```
+This is our cat-postcard wall, all sent using your python wrapper.
+Thanks a lot :)
+-- Someone from the cloud
+```
+
+![postcards](/blog/2022-08_postcards/cats.jpg)
+{{<caption >}} Cat-postcard wall from someone from the cloud.{{< /caption >}}
+
+
+## Conclusion
+
+From cute cat pictures, landscape and architecture, obscure images, selfies, and even a request for date, I received many postcards. 
+
+> A smile is happiness you'll find right under your nose.   
+> -- Tom Wilson  
+
+The reverse engineering work of this project has been much fun, almost as much
+fun as receiving the cards. Thank you everyone for playing along and making me,
+the postman and my roommates smile.
+
 
 
 Thanks for reading.  
