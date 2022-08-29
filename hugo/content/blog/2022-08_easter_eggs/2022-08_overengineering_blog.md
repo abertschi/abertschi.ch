@@ -13,7 +13,7 @@ into the intro page of this website. You can try it out at the root site of
 ---
 
 ## Background
-I finally found the time to add some Easter Eggs to the intro site of my
+I finally found the time to add some Easter eggs to the intro site of my
 personal website. This is a small project I have wanted to build for a few
 years, but never found the time. The website is a conjunction of a static site
 generator and a self-built intro page. The site works just fine without
@@ -63,7 +63,7 @@ chat message to the server, where it receives a server-generated response. This
 architecture is motivated not to spoil some Easter eggs implemented on the site.
 
 ## Easter Eggs are Stages
-The Easter Eggs are implemented in _Stages_ on the server.
+The Easter eggs are implemented in _Stages_ on the server.
 ```go
 type StageHandler interface {
   CanHandle(stage string) bool
@@ -73,7 +73,7 @@ type StageHandler interface {
   FormulateSummary() Response
 }
 ```
-{{< caption >}}Each Easter Egg is implemented with a StageHandler.{{< /caption >}}
+{{< caption >}}Each egg is implemented with a StageHandler.{{< /caption >}}
 
 Each _stage_ decides if it `CanHandle` the current request, and if so, what
 `Response` it will formulate (`FormulateReply`). This allows for server side
@@ -95,13 +95,14 @@ type ResponseEntry struct {
 
 A server `Response` contains text, HTML code and a `Stage` identifier. The
 client then includes the stage in subsequent requests until the stage is solved
-and the server replies with a new Easter Egg. This simple design encapsulates an
+and the server replies with a new Easter egg. This simple design encapsulates an
 Easter egg from the rest of the server code.
 
 ## Try it Out
 
-Try it out at https://abertschi.ch. I may add some more eggs if I find the
-time. The frontend code is open-sourced on[GitHub](https://github.com/abertschi/abertschi.ch).
+Try it out at https://abertschi.ch. I may add some more eggs if I find the time.
+You find the frontend code on
+[GitHub](https://github.com/abertschi/abertschi.ch).
 
 Thanks for reading.  
 -- bean
