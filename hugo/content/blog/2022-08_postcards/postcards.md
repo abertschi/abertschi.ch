@@ -25,7 +25,7 @@ hundreds of cards. Some more unusual than others.
 
 ## Background
 The Swiss Postal Service offers a free service to send postcards within
-Switzerland in their Android/iOS apps. Swiss residents with a [SwissPass]() are
+Switzerland in their Android/iOS apps. Swiss residents with a _SwissPass_ are
 eligible to register at
 [https://service.post.ch](https://service.post.ch/pccweb/public/ui/view/home?shortcut=postcardcreator)
 to design and send postcards online. Their service includes a free postcard
