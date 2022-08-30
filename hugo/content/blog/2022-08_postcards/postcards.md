@@ -29,7 +29,7 @@ Switzerland in their Android/iOS apps. Swiss residents with a [SwissPass]() are
 eligible to register at
 [https://service.post.ch](https://service.post.ch/pccweb/public/ui/view/home?shortcut=postcardcreator)
 to design and send postcards online. Their service includes a free postcard
-every 24 hours. However, this service is hidden in their Android/iOS apps and
+every 24 hours. However, it is hidden in their Android/iOS apps and
 only accessible there. 
 
 This project aims to reverse these apps and build an API wrapper to
