@@ -145,15 +145,15 @@ Thanks a lot :)
 
 ## Conclusion
 
-From cute cat pictures, landscape and architecture, obscure images, selfies, and
-even a request for a date, I received many postcards.
+From cute cat pictures, landscape and architecture, obscure images and trash,
+selfies, and even a request for a date, I received many postcards.
 
 > A smile is happiness you'll find right under your nose.   
 > -- Tom Wilson  
 
 The reverse engineering work of this project has been much fun, almost as much
-fun as receiving the cards. With the above quote by _Tom Wilson_ I would like to thank everyone for playing along and making me,
-the postman, and my roommates smile.
+fun as receiving the cards. Thanks everyone for playing along and making me, the
+postman, and my roommates smile.
 
 
 
