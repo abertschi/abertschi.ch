@@ -19,10 +19,10 @@ _Federal Diploma of Vocational Education and Training in Software Engineering_
 
 ## Work Experience
 **Student Research Assistant, ETH Zurich**  
-03/22 - now (part-time)   
+03/22 - now  
 _Chair of Structural Engineering, Concrete Structures and Bridge Design_    
 _Supervision: Dr. Marius Weber_  
-Working as a software engineer on a Rhinoceros 3D plugin (computer aided design) in the field of finite
+Working mainly on a Rhinoceros 3D plugin (computer aided design) in the field of finite
 element analysis, C#, .NET, Eto.forms, Rhinoceros 3D  
 [Open-Source](https://github.com/kfmResearch-NumericsTeam/StrucEng_Library_Plug_in)
 
