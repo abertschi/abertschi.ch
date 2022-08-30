@@ -1,5 +1,5 @@
 ---
-title: "Overengineering my website with Easter Eggs"
+title: "Easter Eggs on abertschi.ch"
 slug: "overengineering-my-website-with-easter-eggs"
 draft: false
 date: "2022-08-20"
