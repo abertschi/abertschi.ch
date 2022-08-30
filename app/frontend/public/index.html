@@ -19,6 +19,22 @@
             <li class="command"><br/></li>
         </ul>
 </div>
+<script>
+    // optimize: prevent text from briefly flashing up
+    let cx = document.querySelector("#intro").children || [];
+    console.log(cx)
+    for (const c of cx) {
+        c.style.visibility = 'hidden'
+    }
+</script>
+<style>
+    ul {
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+</style>
 
 <div id="app">
 </div>
