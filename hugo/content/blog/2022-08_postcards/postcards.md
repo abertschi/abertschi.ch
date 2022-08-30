@@ -152,7 +152,7 @@ even a request for a date, I received many postcards.
 > -- Tom Wilson  
 
 The reverse engineering work of this project has been much fun, almost as much
-fun as receiving the cards. Thank you everyone for playing along and making me,
+fun as receiving the cards. With the above quote by _Tom Wilson_ I would like to thank everyone for playing along and making me,
 the postman, and my roommates smile.
 
 
