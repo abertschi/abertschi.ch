@@ -225,7 +225,8 @@ export default defineComponent({
       for (let i = 0; i < rx.length; i++) {
         if (rx[i].innerHTML == null) continue
         if (rx[i].innerHTML.indexOf('<span class="typing">|</span>') > -1) {
-          rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>', '');
+          rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>', '<span class="typing' +
+              '"></span>');
         }
       }
     },
@@ -243,7 +244,7 @@ export default defineComponent({
           this._createAndInsertLi(ID_INTRO, this.conversation[i])
         }
       } else {
-        this._scrollToBottomOfPage()
+        // this._scrollToBottomOfPage()
       }
       this.initialDialog = false
       this._setTypingAnimationDefault()
@@ -485,7 +486,6 @@ ul {
   border: none;
   margin-left: 10px;
   font-family: 'Ubuntu Mono';
-
   width: 80%;
 
 }
