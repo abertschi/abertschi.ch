@@ -486,7 +486,7 @@ ul {
   margin-left: 10px;
   font-family: 'Ubuntu Mono';
 
-  width: 90%;
+  width: 80%;
 
 }
 
