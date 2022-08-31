@@ -51,7 +51,7 @@ export default defineComponent({
 
     window.addEventListener('click', this.skipTyping);
     window.addEventListener('touchend', this.skipTyping);
-    window.addEventListener("keypress", this.skipTyping);
+    window.addEventListener("keypress", this.skipTypingKeyPress);
 
     this._setTypingAnimationDefault()
     // this._placeholderHintAnimation()
@@ -62,6 +62,7 @@ export default defineComponent({
     return {
       inputTextPlaceholder: 'and more ...' as string,
       inputText: '' as string,
+      rejectEnter: false,
       showInput: false,
       stop: false,
       initialDialog: true,
@@ -89,6 +90,9 @@ export default defineComponent({
       return div.innerHTML;
     },
     onTextEnter() {
+      if (this.isTyping || this.rejectEnter) {
+        return
+      }
       PersistenceService.markLastUsage()
       let escaped = this._escapeHTML(this.inputText)
       this.questionCtx.push(escaped)
@@ -97,12 +101,14 @@ export default defineComponent({
       this._createAndInsertLi(ID_INTRO, msg)
 
       let that = this
+      this.rejectEnter = true
       CmdHandler.handle(this.inputText, this.$root as Vue, this.questionCtx).then(r => {
         setTimeout(() => {
           for (const entry of r.responses) {
             if (entry.html != null && entry.html != '') {
               that.typeRows([entry.html], r.save)
             }
+            that.rejectEnter = false
             that.typeRows(entry.sentences, r.save)
           }
         }, 500)
@@ -179,6 +185,11 @@ export default defineComponent({
       waitEndOfLineMs = DEFAULT_WAIT_END_OF_LINE_MS
       waitChar = DEFAULT_WAIT_CHAR
     },
+    skipTypingKeyPress(e: KeyboardEvent) {
+      if (e.key === "Enter") {
+        this.skipTyping(e)
+      }
+    },
     skipTyping(e: Event) {
       if (!this.initialDialog) {
         if (this.isTyping) {
@@ -191,7 +202,7 @@ export default defineComponent({
       this.clearHtmlData(ID_INTRO, true)
       this.stop = true;
       this.typingBufferIndex = this.typingBuffer.length
-      this.showInput = false
+      // this.showInput = false
       this.isTyping = false
 
       for (let i = 0; i < this.typingBuffer.length; i++) {
@@ -255,7 +266,7 @@ export default defineComponent({
         return
       }
       this.isTyping = true
-      this.showInput = false
+      // this.showInput = false
       this._removeTypingAnimation(ID_INTRO)
 
       let i = this.typingBufferIndex
