@@ -199,13 +199,11 @@ export default defineComponent({
       waitChar = DEFAULT_WAIT_CHAR
     },
     skipTypingKeyPress(e: KeyboardEvent) {
-      console.log('skipTypingKeyPress', e)
       if (e.key === "Enter") {
         this.skipTyping(e)
       }
     },
     skipTyping(e: Event) {
-      console.log('skipTyping', e)
       if (!this.initialDialog) {
         if (this.isTyping) {
           this._setTypingAnimationQuick()
