@@ -77,6 +77,19 @@ export default defineComponent({
     }
   },
   methods: {
+    _formatDate(date: Date) {
+      let y = date.getFullYear(),
+          m = date.getMonth() + 1,
+          d = date.getDate(),
+          hour = date.getHours(),
+          minute = date.getMinutes(),
+          hourFormatted = hour % 12 || 12,
+          minuteFormatted = minute < 10 ? "0" + minute : minute,
+          morning = hour < 12 ? "am" : "pm";
+
+      return y + "-" + m + "-" + d + " "
+          + hourFormatted + ":" + minuteFormatted + morning;
+    },
     _scrollToBottomOfPage() {
       window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     },
@@ -94,7 +107,7 @@ export default defineComponent({
         return
       }
       PersistenceService.markLastUsage()
-      let escaped = this._escapeHTML(this.inputText)
+      let escaped = this._escapeHTML(`[${this._formatDate(new Date())}]: ` + this.inputText)
       this.questionCtx.push(escaped)
       let msg = `<i style="opacity: 0.4; font-size: 13px;">${escaped}</i>`
       this._addConversation(msg)
@@ -186,11 +199,13 @@ export default defineComponent({
       waitChar = DEFAULT_WAIT_CHAR
     },
     skipTypingKeyPress(e: KeyboardEvent) {
+      console.log('skipTypingKeyPress', e)
       if (e.key === "Enter") {
         this.skipTyping(e)
       }
     },
     skipTyping(e: Event) {
+      console.log('skipTyping', e)
       if (!this.initialDialog) {
         if (this.isTyping) {
           this._setTypingAnimationQuick()
@@ -225,8 +240,8 @@ export default defineComponent({
       for (let i = 0; i < rx.length; i++) {
         if (rx[i].innerHTML == null) continue
         if (rx[i].innerHTML.indexOf('<span class="typing">|</span>') > -1) {
-          rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>', '<span class="typing' +
-              '"></span>');
+          rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>',
+              '<span class="typing"></span>');
         }
       }
     },
