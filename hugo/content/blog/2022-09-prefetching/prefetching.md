@@ -29,6 +29,8 @@ I hope they are nonetheless useful for someone interested in the matter.
 
 <!-- ## Background -->
 
+{{< toc >}}
+
 ## Introduction
 Side channel attacks such as <cite> Prime+Probe[^1]</cite> or
 <cite>Flush+Reload[^2]</cite> have become a powerful threat to many systems. In
@@ -71,21 +73,21 @@ As we can see, the CPU discussed has 6 cores (12 logical). It has a data- and in
 
 
 [^1]: Dag Arne Osvik and Adi Shamir and Eran Tromer, 2005, [Cache attacks and
-      Countermeasures: the Case of AES](https://eprint.iacr.org/2005/271),
-      Cryptology ePrint Archive, Paper 2005/271
-    
+Countermeasures: the Case of AES](https://eprint.iacr.org/2005/271),
+Cryptology ePrint Archive, Paper 2005/271
+
 
 [^2]: Yuval Yarom and Katrina E. Falkner, 2014, [FLUSH+RELOAD: A High
-    Resolution, Low Noise, L3 Cache Side-Channel
-    Attack](https://www.usenix.org/node/184416.), 23rd USENIX Security Symposium
-    (USENIX Security 14)
+Resolution, Low Noise, L3 Cache Side-Channel
+Attack](https://www.usenix.org/node/184416.), 23rd USENIX Security Symposium
+(USENIX Security 14)
 
 [^3]: Intel. 2016, [Intel 64 and IA-32 Architectures Optimization Reference
-    Manual](https://web.archive.org/save/https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-optimization-manual.pdf)
+Manual](https://web.archive.org/save/https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-optimization-manual.pdf)
 
 
 [^4]: Intel, 2019, [Intel 64 and IA-32 Architectures Software Developer’s
-    Manual, Model Specific Registers](https://web.archive.org/save/https://www.intel.com/content/dam/develop/external/us/en/documents/335592-sdm-vol-4.pdf).
+Manual, Model Specific Registers](https://web.archive.org/save/https://www.intel.com/content/dam/develop/external/us/en/documents/335592-sdm-vol-4.pdf).
 
 ## Hardware Prefetchers
 If we skim through Intel manuals, we find the presence of four hardware prefetchers <cite>[^3]
@@ -96,10 +98,10 @@ Manual_ [^4]</cite>).
 
 I summarize the bits below:
 
-- Bit 0: L2 Hardware Prefetcher
-- Bit 1: L2 Adjacent Cache Line Prefetcher
-- Bit 2: L1 Data Cache Unit (DCU) Hardware Prefetcher
-- Bit 3: L1 Data Cache Unit (DCU) IP Prefetcher
+- Bit 0: L2 Hardware Prefetcher (Stream Prefetcher)
+- Bit 1: L2 Adjacent Cache Line Prefetcher (128 bytes boundary Prefetcher)
+- Bit 2: L1 Data Cache Unit (DCU) Hardware Prefetcher (Next Line Prefetcher)
+- Bit 3: L1 Data Cache Unit (DCU) IP Prefetcher (Stride Prefetcher)
 
 We can set the MSR register using
 [msr-tools](https://github.com/intel/msr-tools) developed by Intel (now
@@ -113,8 +115,11 @@ sudo wrmsr -a 0x1a4 0xf
 ### Intel Manuals on Prefetching
 There is only sparse official information available on data prefetching. Sparse
 enough to briefly quote the information here. The subsequent text is shortened
-from <cite>Chapter 2.3.5.4 in _Intel 64 and IA-32 Architectures Optimization
-Reference Manual_ [^3]</cite>. I marked some interesting bits in bold.
+from <cite>_Intel 64 and IA-32 Architectures Optimization
+Reference Manual_ [^3]</cite>. I marked some interesting bits in bold:
+
+{{< details "Chapter 2.3.5.4, _Intel 64 and IA-32 Architectures Optimization Reference Manual_">}}
+
 
 > #### L2 Hardware Prefetcher (Streamer):  
 > This prefetcher monitors read requests from the L1 cache for ascending and descending sequences of addresses. Monitored read requests include L1 DCache requests initiated by load and store operations and by the hardware prefetchers, and L1 ICache requests for code fetch. When a forward or backward stream of requests is detected, the anticipated cache lines are prefetched. **Prefetched cache lines must be in the same 4K page**.
@@ -136,43 +141,114 @@ Reference Manual_ [^3]</cite>. I marked some interesting bits in bold.
 > #### L1 Data Cache Unit (DCU) IP Prefetcher:
 > This prefetcher keeps track of individual load instructions. If a load instruction is detected to have a regular stride, then a prefetch is sent to the next address which is the sum of the current address and the stride. This prefetcher can prefetch forward or backward and can detect strides of up to 2K bytes.
 >
-
+{{< /details >}}
 
 ## Experiments
-In this section we will run some experiments to verify some of the behavior we
-got from Intel's manual. The experiments execute on the aforementioned CPU.
+In this section we will run experiments to verify some of the behavior we
+received from Intel manuals. The experiments execute on the aforementioned CPU.
+
+The experiments follow a _Prime and Probe_ protocol:
+
+1. We allocate a probing array of contiguous memory using _mmap_, it has the size
+of a multiple of a page size, e.g. 3 x 4KB. This is our _probing array_.
+2. We then flush the entire _probing array_ to ensure that no cache-line is the
+cache using _clflush_.
+3. We then performed the desired sequence of memory access. This is the _Prime
+   Phase_.
+4. We probe a single cache line in the _probing array_. Based on the access
+time, decide if it was in a cache or not. This is the _Probe Phase_.
+5. We now repeat steps 2. to 4. until all cache lines are probed. This is
+motivated to ensure that probing does not confuse the prefetchers.
+
+If we access memory in a loop, we further have to ensure that speculative
+execution will not induce unwanted memory accesses. We solve this by putting a
+memory fence at the beginning of the loop body, i.e. with the intrinsic `_mm_mfence`.
 
 It turns out that modifications on the MSR registers will flush the cache so we
 cannot prime the cache and then disable the prefetchers during the probing phase
 of the experiment. Also, remember that the granularity of a cache-line is 64
 bytes on Intel CPUs.
 
-The experiments follow a _Prime and Probe_ protocol:
 
-1. We allocate a probing array of contiguous memory using _mmap_, it has the size
-  of a multiple of a page size, e.g. 3 x 4KB. This is our _probing array_.
-2. We then flush the entire _probing array_ to ensure that no cache-line is the
-   cache using _clflush_.
-3. We then access some memory. This is the _Prime Phase_.
-4. We probe a single cache line in the _probing array_. Based on the access
-   time, decide if it was in a cache or not. This is the _Probe Phase_.
-5. We now repeat steps 2. to 4. until all cache lines are probed. This is
-   motivated to ensure that probing does not confuse the prefetchers.
+{{< details "A code sample which illustrates the protocol of the experiments is attached here.">}}
+```c
+/*
+* Sample code snippet to illustrate the gist of the timing measurements.
+* Here we measure prefetching impact when accessing TARGET,
+* a single cache line.
+*/
+const int N = 1000;
+const int M = 128;
+const long CL = 64;
+const int TARGET = 37;
 
-If we access memory in a loop, we further have to ensure that speculative
-execution will not induce unwanted memory accesses. We solve this by putting a
-memory fence at the beginning of the loop body, i.e. with the intrinsic `_mm_mfence`.
+char* probe_array = mmap(NULL, M * CL,
+PROT_READ | PROT_WRITE,
+MAP_PRIVATE | MAP_ANONYMOUS | MAP_POPULATE, -1, 0);
+
+size_t access_times[M];
+for(int i = 0; i < M; i++) {
+access_times[i] = 0;
+}
+
+// # of measurements
+for(int n = 0; n < N; n++) {
+
+    // only probe one cacheline per experiment
+    for(int el = 0; el < M; el++) {
+
+        // flush the probing array
+        for(int i = 0; i < M; i++) {
+            _mm_clflush(probe_array + i * CL);
+        }
+        _mm_mfence();
+
+        // access one cacheline
+        *(volatile char*)(probe_array + TARGET * CL);
+        _mm_mfence();
+
+        // check which elements have been prefetched
+        access_times[el] += measure_access(probe_array + el * CL);
+    }
+    }
+
+static inline int measure_access(char *addr) {
+    unsigned int t0 = 0;
+    unsigned int t1 = 0;
+    u_int64_t t00 = 0;
+    u_int64_t t01 = 0;
+
+    _mm_mfence();
+    t00 = __rdtscp(&t0);
+    _mm_mfence();
+
+    *(volatile char *) addr;
+
+    _mm_mfence();
+    t01 = __rdtscp(&t1);
+    int cycles = (int) (t01 - t00);
+    return cycles;
+}
+```
+
+{{< /details >}}
+
 
 <!-- ### L2 Hardware Prefetcher -->
 
 ### L2 Streamer: Prefetched cache lines must be in the same 4K page
 In this experiment, we try to reproduce the L2 Streamer prefetch behavior across a 4K page. We therefore disable all prefetchers except Streamer.
 
-> [Streamer] When a forward or backward stream of requests is detected, the anticipated cache lines are prefetched. Prefetched cache lines must be in the same 4K page. 
+> [Streamer] When a forward or backward stream of requests is detected, the anticipated cache lines are prefetched. **Prefetched cache lines must be in the same 4K page.**
+>
+> -- Intel 64 and IA-32 Architectures Optimization Reference Manual
 
- We access a number of cache lines in sequence (green) and probe the array for hits introduced by the prefetcher (red). Cache misses are marked in gray.
+We access a number of cache lines in sequence (green) and probe the array for hits introduced by the prefetcher (red). Cache misses are marked in gray.
 
-We can clearly see that no prefetching occurs across a 4KB page boundary, despite the access of cache-lines 50 to 63. Interestingly, the first two cache-lines of every page in the probing array are always prefetched.
+In the graphs depicted below, we can clearly see that no prefetching occurs
+across a 4KB page boundary, despite the access of cache-lines 50 to 63.
+Interestingly, the first two cache-lines of every page in the probing array are
+always prefetched.
 
 [![l2stream_pageboundary1](/blog/2022-09-prefetching/page_boundary_50_a.png)](/blog/2022-09-prefetching/page_boundary_50_a.png)
 {{<caption >}} Probe cache-lines 50 to 54 (green), prefetching of cache-line until 60 (red). {{< /caption >}}
@@ -183,36 +259,76 @@ We can clearly see that no prefetching occurs across a 4KB page boundary, despit
 [![l2stream_pageboundary3](/blog/2022-09-prefetching/page_boundary_50_63.png)](/blog/2022-09-prefetching/page_boundary_50_63.png)
 {{<caption >}} Probe cache-lines 50 to 63. No prefetching across page boundary. {{< /caption >}}
 
-What happened is that we initiated a new stream, determined its direction and confirmed the access
-pattern so that L2 Streamer started to prefetch multiple +1 cache-lines ahead. The prefetching stops at the page boundary. This is in accordance to the manual. 
+What happened is that we initiated a new stream, determined its direction and confirmed the access pattern so that L2 Streamer started to prefetch multiple +1 cache-lines ahead. The prefetching stops at the page boundary. This is in accordance to the manual. 
 
 However, it remains unclear why we receive a cache hit in the first two
 cache-lines of every page.
 
+### L2 Streamer: Prefetch Aggressiveness
+Regarding the number of lines to prefetch ahead, the manual reads the following bits:
+
+> [L2 Streamer] Enhancement to the streamer includes the following features:
+> - The streamer may issue **two prefetch requests on every L2 lookup**. The **streamer can run up to 20 lines ahead of the load request.**
+> 
+> - Adjusts dynamically to the number of outstanding requests per core. If there are **not many outstanding requests, the streamer prefetches further ahead**. If there are many outstanding requests it prefetches to the LLC only and less far ahead.
+>
+> -- Intel 64 and IA-32 Architectures Optimization Reference Manual
+
+The experiments shown below demonstrate prefetching behavior following a linear access pattern. We notice L2 Streamer prefetching starting with the second memory access.
+
+
+[![stream](/blog/2022-09-prefetching/init_prefetch_1.png)](/blog/2022-09-prefetching/init_prefetch_1.png)
+{{<caption >}}L2 Streamer, One memory access, no prefetching {{< /caption >}}
+[![stream](/blog/2022-09-prefetching/init_prefetch_2.png)](/blog/2022-09-prefetching/init_prefetch_2.png)
+{{<caption >}}L2 Streamer, 2 memory accesses, 2 cache lines prefetched {{< /caption >}}
+
+
+[![stream](/blog/2022-09-prefetching/init_prefetch_3.png)](/blog/2022-09-prefetching/init_prefetch_3.png)
+{{<caption >}}L2 Streamer, 3 memory accesses, 3 cache lines prefetched {{< /caption >}}
+
+Increasing the number of consecutive memory accesses increases the number of
+prefetched lines. With an access strike of 30 consecutive cache lines, we manage
+to prefetch 32 cache lines ahead, which is higher than the in the manual stated
+20 lines. However, around 17 prefetched lines, we notice higher access times so
+they may hit the L3 cache.
+
+
+[![stream](/blog/2022-09-prefetching/stride_1_15.png)](/blog/2022-09-prefetching/stride_1_15.png)
+{{<caption >}}L2 Streamer, 15 memory accesses, 17 cache lines prefetched {{< /caption >}}
+[![stream](/blog/2022-09-prefetching/stride_1_30.png)](/blog/2022-09-prefetching/stride_1_30.png)
+{{<caption >}}30 Streamer, 30 memory accesses, 32 cache lines prefetched {{< /caption >}}
+
+Additionally, for different linear access strides (stride of 4, 9, 32 cache lines), we see two consecutive cache lines prefetched ahead.
+
+[![stream](/blog/2022-09-prefetching/stride_4.png)](/blog/2022-09-prefetching/stride_4.png)
+{{<caption >}}L2 Streamer, Linear access pattern with stride size of 4. Each access causes 2 additional prefetches. {{< /caption >}}
+
+[![stream](/blog/2022-09-prefetching/stride_9.png)](/blog/2022-09-prefetching/stride_9.png)
+{{<caption >}}L2 Streamer, Linear access pattern with stride size of 9. Each access causes 2 additional prefetches. {{< /caption >}}
+[![stream](/blog/2022-09-prefetching/stride_32.png)](/blog/2022-09-prefetching/stride_32.png)
+{{<caption >}}L2 Streamer, Linear access pattern with stride size of 32. Each access causes 2 additional prefetches. {{< /caption >}}
+
+
 
 ### L2 Adjacent: Prefetch on a 128 bytes boundary
 The adjacent L2 cache-line prefetcher prefetches one additional cache-line such
-that two cache-lines on a 128 bytes boundary are always in the cache.
+that two cache-lines on a 128 bytes boundary are always in the cache. Put differently, the manual reads:
 
-> [L2 Adjacent] This prefetcher strives to complete every cache line fetched to the L2 cache with the pair line that completes it to a 128-byte aligned chunk.
+> [L2 Adjacent] This prefetcher strives to complete every cache line fetched to the **L2 cache with the pair line that completes it to a 128-byte aligned chunk.**
+>
+> -- Intel 64 and IA-32 Architectures Optimization Reference Manual
 
- In other words, if we access cache-line 42, the prefetcher will fetch
- cache-line 43, and if we access cache-line 37, the 128 byte boundary includes
- cache-line 36. This is demonstrated with the following two experiments and
- seems to work in accordance to the bits we found in the manual.
+As an example, if we access cache line 42, the prefetcher will fetch cache line
+43, and if we access cache line 37, the 128 byte boundary includes cache
+line 36. This is demonstrated with the following two experiments. All
+prefetchers except the L2 Adjacent are disabled.
 
 [![l2adj1](/blog/2022-09-prefetching/adjacent_1.png)](/blog/2022-09-prefetching/adjacent_1.png)
 {{<caption >}} {{< /caption >}}
 
 [![l2adj2](/blog/2022-09-prefetching/adjacent_2.png)](/blog/2022-09-prefetching/adjacent_2.png)
-{{<caption >}} Prefetch behavior of L2 Adjacent Prefetcher. Behavior is ahead (next cache-line) as well as previous cache line, depending on the 128 bytes alignment of the cache line accessed.{{< /caption >}}
+{{<caption >}} Prefetch behavior of L2 Adjacent Prefetcher. Behavior is ahead as well behind, depending on the 128 bytes alignment of the cache line accessed.{{< /caption >}}
 
-
-### L2 Streamer: Access up to 20 lines ahead of the load request.
-
-> [L2 Streamer] The streamer may issue two prefetch requests on every L2 lookup. The streamer can run up to 20 lines ahead of the load request.
-> 
-> Adjusts dynamically to the number of outstanding requests per core. If there are not many outstanding requests, the streamer prefetches further ahead. If there are many outstanding requests it prefetches to the LLC only and less far ahead.
 
 ## Literature
 Some good corner stones for further reading and experiments include the following literature;
@@ -222,6 +338,8 @@ Hardware Prefetcher (Streamer) in experiments running multiple threads on
 the same physical core [5]. Wang et al. [6] study prefetching and replacement
 policy on several CPUs and further design a prime and probe attack which
 minimizes the impact of prefetching.
+
+## Appendix
 
 ## Credits
 2688
