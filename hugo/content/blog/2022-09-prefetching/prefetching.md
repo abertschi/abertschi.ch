@@ -177,7 +177,7 @@ Reference Manual_ [^3]</cite>. I marked some interesting bits in bold:
 
 ## Experiments
 In this section, we will run experiments to verify some of the behavior we
-received from Intel manuals. The experiments are executed on the aforementioned CPU.
+received from Intel manuals. The experiments are executed on the aforementioned CPU and pinned to a single core using [taskset](https://man7.org/linux/man-pages/man1/taskset.1.html).
 
 The experiments follow a _Prime and Probe_ protocol:
 
