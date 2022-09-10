@@ -1,9 +1,9 @@
 ---
 title: "Breaking ASLR with Pagetable Walks"
-date: "2020-09-01"
+date: "2022-09-03"
 slug: "aslr"
 description: ""
-draft: false
+draft: true
 toc: true
 tags: [
     "programming", "security"
