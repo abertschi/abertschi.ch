@@ -1,8 +1,7 @@
 ---
-title: "Exploring the Prefetching Behavior of an Intel Coffee Lake CPU"
+title: "Exploring Hardware Prefetchers on Coffee Lake"
 date: "2022-09-05"
 slug: "prefetching"
-description: ""
 draft: false
 toc: true
 tags: [
@@ -11,7 +10,7 @@ tags: [
 ---
 
 In this post, I will summarize some of the insights I have gotten while looking
-at the prefetching behavior of an _Intel Coffee Lake CPU_. Prefetching plays an
+at the prefetching behavior of an _Intel Coffee Lake_ CPU. Prefetching plays an
 important role in system performance and their study is important for efficient
 cache side-channel attacks. However, Intel's prefetchers remain poorly
 documented and their inner-workings are mostly obfuscated. While some of the
