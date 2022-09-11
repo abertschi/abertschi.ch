@@ -76,7 +76,7 @@ with different modes including:
 - Bulk sending cards from a folder,
 - Slicing a picture into tiles of many cards,
 - Sending stock images,
-- Sending quotes of _Chuck Norris_,
+- Sending quotes of _Chuck Norris_ (be aware, his first program was kill -9!),
 - Sending random pictures from the internet (no filtering, may not be SFW)
 
 
