@@ -1,5 +1,5 @@
 ---
-title: "Exploring Hardware Prefetchers on Coffee Lake"
+title: "Battling the Prefetcher: Exploring Coffee Lake (part 1)"
 date: "2022-09-05"
 slug: "prefetching"
 draft: false
