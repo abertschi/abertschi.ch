@@ -1,9 +1,9 @@
 ---
-title: "Receiving Hundreds of Postcards from the Interwebs"
+title: "Receiving Hundreds of Postcards from the Internet"
 slug: "receiving-postcards"
 description: ""
 draft: false
-date: "2022-08-01"
+date: "2022-08-25"
 tags:
   - programming
   - reversing

@@ -51,7 +51,7 @@ deduplicated memory shared between two distrusting virtual machines.
 Furthermore, the attacker can issue flush instructions to selectively evict
 memory locations from the cache. On x86, the clflush instruction is
 unpriviledged. If no clflush is available, an attack may use an eviction
-strategy (<cite>see this interesting read[^evict]</cite>).
+strategy (<cite>see _this interesting read_[^evict]</cite>).
 
 1. In the first phase of the attack, the attacker flushes all cache lines of
    the shared memory from the cache.
