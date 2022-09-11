@@ -411,9 +411,9 @@ a black-box and the results shown in this post are drop in the ocean. I hope
 that these insights will help me to more often look across levels of
 abstractions and to better understand why things work the way they do.
 
-An upcoming post will use this information here _to try  to build_ a cache
-side-channel attack with a minimal buffer size (e.g. solely 256 cache lines instead of many pages) and
-a custom access pattern to avoid unwanted prefetches. Stay tuned :)
+An upcoming post will use this information here to build a cache side-channel
+attack with a minimal buffer size (e.g. solely 256 cache lines instead of many
+pages) and a custom access pattern to avoid unwanted prefetches. Stay tuned :)
 
 Thanks for reading   
 -- bean
