@@ -179,16 +179,15 @@ Reference Manual_ [^3]</cite>. I marked some interesting bits in bold:
 In this section, we will run experiments to verify some of the behavior we
 received from Intel manuals. The experiments are executed on the aforementioned CPU.
 
-The experiments follow a _Prime and Probe_ protocol:
+The experiments follow a _Flush and Reload_ protocol:
 
 1. We allocate a probing array of contiguous memory using _mmap_, it has the size
 of a multiple of a page size, e.g. 3 x 4KB. This is our _probing array_.
 2. We then flush the entire _probing array_ to ensure that no cache line is the
 cache using _clflush_.
-3. We then performed the desired sequence of memory access. This is the _Prime
-   Phase_.
+3. We then performed the desired sequence of memory access.
 4. We probe a single cache line in the _probing array_. Based on the access
-time, we decide if it was in a cache hit or not. This is the _Probe Phase_.
+time, we decide if it was in a cache hit or not.
 5. We now repeat steps _2. to 4._ until all cache lines are probed. This is
 motivated to ensure that probing does not confuse the prefetchers.
 
