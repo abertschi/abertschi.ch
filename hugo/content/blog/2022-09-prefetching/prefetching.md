@@ -1,5 +1,5 @@
 ---
-title: "Battling the Prefetcher: Exploring Coffee Lake"
+title: "Battling the Prefetcher: Exploring Coffee Lake (Part 1)"
 date: "2022-09-05"
 slug: "prefetching"
 draft: false
@@ -15,7 +15,7 @@ important role in system performance and their study is important for efficient
 cache side-channel attacks. However, Intel's prefetchers remain poorly
 documented and their inner-workings are mostly obfuscated. While some of the
 results discussed in this post are incomplete and just a mere drop in the ocean,
-I hope they are nonetheless useful for someone interested in the matter.
+I hope they are nonetheless useful for someone interested in the matter. See also [Part 2](/blog/2022/prefetching-side-channel/).
 
 <!--more-->
 ---
@@ -410,7 +410,7 @@ a black-box and the results shown in this post are drop in the ocean. I hope
 that these insights will help me to more often look across levels of
 abstractions and to better understand why things work the way they do.
 
-An upcoming post will use this information here and will try to build a cache side-channel attack with a minimal buffer size (e.g. solely 256 cache lines instead of many pages) and a custom access pattern to avoid unwanted prefetches. Stay tuned :)
+[Part 2](/blog/2022/prefetching-side-channel/) will use this information here and will try to build a cache side-channel attack with a minimal buffer size (e.g. solely 256 cache lines instead of many pages) and a custom access pattern to avoid unwanted prefetches. Stay tuned :)
 
 Thanks for reading   
 -- bean
