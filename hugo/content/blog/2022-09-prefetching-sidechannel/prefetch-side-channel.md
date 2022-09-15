@@ -1,6 +1,6 @@
 ---
 title: "Battling the Prefetcher: A side-channel Attack (Part 2)"
-date: "2022-09-11"
+date: "2022-09-14"
 slug: "prefetching-side-channel"
 draft: false
 toc: true

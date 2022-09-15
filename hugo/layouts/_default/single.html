@@ -8,6 +8,14 @@
     </time>
   </i>
 </p>
+<p>
+  <i>
+  {{ range (.GetTerms "tags") }}
+  <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+  {{ end }}
+  </i>
+</p>
+
 {{ end }}{{ end }}
 <content>
   {{ .Content }}
