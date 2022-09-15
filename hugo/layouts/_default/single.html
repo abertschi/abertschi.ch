@@ -12,9 +12,14 @@
 <content>
   {{ .Content }}
 </content>
+
+<p>
+  <small><i>Found a typo or a mistake? <a href="https://github.com/abertschi/abertschi.ch/edit/master/hugo/content/{{ .Page.File.Path }}">Edit this Page on Github</a> and submit a Pull Request. Thank you.</i></small>
+</p>
 <p>
   {{ range (.GetTerms "tags") }}
   <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
   {{ end }}
 </p>
+
 {{ end }}
