@@ -8,11 +8,11 @@ tags: [
     "programming", "security"
 ]
 ---
-This is the second post on the topic of prefetchers. In the [first post](/blog/2022/prefetching/), we
-established the presence of several hardware prefetchers on a _Coffee Lake_ CPU
-and verified some of their behaviors in the level 2 cache. We will use these
-insights here and try to build a cache side-channel attack on a much smaller
-probing buffer than typically used.
+This is the second post on the topic of prefetchers. In the [first
+post](/blog/2022/prefetching/), we established the presence of several hardware
+prefetchers on a _Coffee Lake_ CPU and verified some of their behaviors in the
+level 2 cache. We will use these insights here and try to build a cache
+side-channel attack on a much smaller probing buffer than typically used.
 <!--more-->
 ---
 
@@ -60,14 +60,14 @@ little memory to probe accesses.
 
 ### Flush and Reload
 The attack which we will simulate is a flush and reload attack. In a
-<cite>_flush+reload_[^flushreload]</cite> scenario, an attacker does not control a
-victim's execution, and the victim and attacker share some target code or data.
-This may be shared object files between distrusting user processes or
+<cite>_flush+reload_[^flushreload]</cite> scenario, an attacker does not control
+a victim's execution, and the victim and attacker share some target code or
+data. This may be shared object files between distrusting user processes or
 deduplicated memory shared between two distrusting virtual machines.
 Furthermore, the attacker can issue flush instructions to selectively evict
 memory locations from the cache. On x86, the clflush instruction is
-unprivileged. If no clflush is available, an attack may use an eviction
-strategy (<cite>see _this interesting read_[^evict]</cite>).
+unprivileged. If no clflush is available, an attack may use an eviction strategy
+(<cite>see _this interesting read_[^evict]</cite>).
 
 1. During the first phase of the attack, the attacker flushes all cache lines of
    the shared memory from the cache.
@@ -76,7 +76,9 @@ strategy (<cite>see _this interesting read_[^evict]</cite>).
    access times of all cache lines. If he receives a cache hit, then the memory
    line was accessed by the victim in step 2.
    
-Powerful attacks such as _Meltdown_ and _Spectre_ are derived from this idea. As an excursion and to motivate flush+reload further, consider this snippet:
+Powerful attacks such as _Meltdown_ and _Spectre_ are derived from this idea. As
+an excursion and to motivate flush+reload further, consider this snippet:
+
 ```
 # char probing_array[4096 * 256];
 mov eax, [kernel-address]              // Segmentation fault
@@ -88,16 +90,25 @@ that distinct values of `eax` end up on different pages. Due to out-of-order
 execution, the access into `probing_array` ends up in the cache. The pipeline is
 flushed due to the illegal access of privileged memory. However, the
 microarchitectural changes remain in the cache. With a signal handler, we can
-recover from the segfault and probe the cache for a kernel byte leak. This is the
-gist of the <cite>_Meltdown_[^meltdown] attack</cite>.
+recover from the segfault and probe the cache for a kernel byte leak. This is
+the gist of the <cite>_Meltdown_[^meltdown] attack</cite>.
 
-[^evict]: Oren, Yossef and Kemerlis, Vasileios P. and Sethumadhavan, Simha and Keromytis, Angelos D., 2015, [The Spy in the Sandbox -- Practical Cache Attacks in Javascript](https://arxiv.org/abs/1502.07373)
+[^evict]: Oren, Yossef and Kemerlis, Vasileios P. and Sethumadhavan, Simha and
+    Keromytis, Angelos D., 2015, [The Spy in the Sandbox -- Practical Cache
+    Attacks in Javascript](https://arxiv.org/abs/1502.07373)
 
 
-[^flushreload]: Yuval Yarom and Katrina Falkner, 2014, [FLUSH+RELOAD: A High Resolution, Low Noise, L3 Cache Side-Channel Attack](https://www.usenix.org/node/184416), 23rd USENIX Security Symposium (USENIX Security 14)
+[^flushreload]: Yuval Yarom and Katrina Falkner, 2014, [FLUSH+RELOAD: A High
+    Resolution, Low Noise, L3 Cache Side-Channel
+    Attack](https://www.usenix.org/node/184416), 23rd USENIX Security Symposium
+    (USENIX Security 14)
 
-[^meltdown]: Moritz Lipp and Michael Schwarz and Daniel Gruss and Thomas Prescher and Werner Haas and Anders Fogh and Jann Horn and Stefan Mangard and Paul Kocher and Daniel Genkin and Yuval Yarom and Mike Hamburg, 2018, [Meltdown: Reading Kernel Memory from User Space](https://www.usenix.org/conference/usenixsecurity18/presentation/lipp), 27th USENIX Security Symposium (USENIX Security 18).   
-
+[^meltdown]: Moritz Lipp and Michael Schwarz and Daniel Gruss and Thomas
+    Prescher and Werner Haas and Anders Fogh and Jann Horn and Stefan Mangard
+    and Paul Kocher and Daniel Genkin and Yuval Yarom and Mike Hamburg, 2018,
+    [Meltdown: Reading Kernel Memory from User
+    Space](https://www.usenix.org/conference/usenixsecurity18/presentation/lipp),
+    27th USENIX Security Symposium (USENIX Security 18).
 
 ## Threat Model
 In the scope of this post, we assume that the victim and attacker are in the
@@ -105,23 +116,26 @@ In the scope of this post, we assume that the victim and attacker are in the
 shared buffer of 4 pages) by the victim, and then use the said probing buffer to
 probe the victim's memory access for a cache hit. The attacker uses clflush and
 the process is pinned to a core with taskset. We further allow the attacker to
-repeat the experiment as often as we want to increase accuracy. Also, we allow the
-attacker to disable the L1 prefetchers if this helps to increase accuracy. The
-attacker's probing is done in a way that (hopefully :-)) to confuse the prefetcher
-so it does not to hit the cache and introduce false positives.
+repeat the experiment as often as we want to increase accuracy. Also, we allow
+the attacker to disable the L1 prefetchers if this helps to increase accuracy.
+The attacker's probing is done in a way that (hopefully :-)) to confuse the
+prefetcher so it does not to hit the cache and introduce false positives.
 
 ## Experiments
 The experiments run on an Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz, pinned on a
 single core with taskset. Remember from [Part
-1](blog/2022/prefetching-side-channel/) that we primarily got reliable insights for
-the L2 cache prefetchers. Hence, the experiments below distinguish a setup that
-enables L2 prefetchers from all prefetchers.
+1](blog/2022/prefetching-side-channel/) that we primarily got reliable insights
+for the L2 cache prefetchers. Hence, the experiments below distinguish a setup
+that enables L2 prefetchers from all prefetchers.
 
 <!-- With no reliable results for L1 -->
 <!-- prefetchers, we cannot use many insights from blog post Part 1. -->
 
 ### Methodology
-As we already established in the Threat Model, we have a shared `probing_buffer` of 4 pages. With a stride size of a cache line (64 bytes), this allows us in theory to leak `4 * 4096 / 64 = 256` distinct values at a time, or 8 bits.
+As we already established in the Threat Model, we have a shared `probing_buffer`
+of 4 pages. With a stride size of a cache line (64 bytes), this allows us in
+theory to leak `4 * 4096 / 64 = 256` distinct values at a time, or 8 bits.
+
 ```
 // pseudo c code:
 
@@ -139,7 +153,11 @@ int secret = 100;
 // attacker:
 /* battle prefetcher and probe probing_buffer to leak secret. */
 ```
-The side-channel is the probing buffer (or the underlying cache that caches access into the probing buffer). The victim accesses a secret element in the buffer and the attacker tries to recover the secret with an access order that confuses the prefetchers. The more the prefetchers are confused, the less likely they introduce unwanted cache hits.
+The side-channel is the probing buffer (or the underlying cache that caches
+access into the probing buffer). The victim accesses a secret element in the
+buffer and the attacker tries to recover the secret with an access order that
+confuses the prefetchers. The more the prefetchers are confused, the less likely
+they introduce unwanted cache hits.
 
 ### Leaking 5 bits with L2 Prefetchers
 In the first experiment, we will focus on a single page. A page has 4096 bytes,
@@ -178,26 +196,30 @@ see that the secrets can be recovered.
 
 Secrets 0, 1 (success):
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-0.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-0.csv.svg)
-{{<caption >}} The victim accesses cache line 0 (secret). We receive an L1 hit in
-cache line 0. {{< /caption >}}
+{{<caption >}} The victim accesses cache line 0 (secret). We receive an L1 hit
+in cache line 0. {{< /caption >}}
 
 
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-1.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-1.csv.svg)
-{{<caption >}}The victim accesses cache line 1 (secret). We receive an L2 hit in cache line 0. {{< /caption >}}
+{{<caption >}}The victim accesses cache line 1 (secret). We receive an L2 hit in
+cache line 0. {{< /caption >}}
 
 Secrets 24, 25 (success):
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-24.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-25.csv.svg)
-{{<caption >}}The victim accesses cache line 24 (secret). We receive an L1 hit in cache
-line 24. Note that there is noise in cache line 22. However, the attack still succeeds.{{< /caption >}}
+{{<caption >}}The victim accesses cache line 24 (secret). We receive an L1 hit
+in cache line 24. Note that there is noise in cache line 22. However, the attack
+still succeeds.{{< /caption >}}
 
 
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-25.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-25.csv.svg)
-{{<caption >}} The victim accesses cache line 25 (secret). We receive an L2 hit in cache line 24. {{< /caption >}}
+{{<caption >}} The victim accesses cache line 25 (secret). We receive an L2 hit
+in cache line 24. {{< /caption >}}
 
 Secret 30, 31 (success):
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-30.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-30.csv.svg)
-{{<caption >}} The victim accesses cache line 30 (secret). We receive an L1 hit in
-cache line 30. There is noise in cache line 28. However, the attack still succeeds.{{< /caption >}}
+{{<caption >}} The victim accesses cache line 30 (secret). We receive an L1 hit
+in cache line 30. There is noise in cache line 28. However, the attack still
+succeeds.{{< /caption >}}
 
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-31.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-31.csv.svg)
 {{<caption >}} The victim accesses cache line 31 (secret). We receive an L2 hit
@@ -219,21 +241,24 @@ depict unsuccessful secret recoveries.
 
 Secrets 0, 1 (fail):
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-all-0.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-all-0.csv.svg)
-{{<caption >}} The victim accesses secret 0, we receive an L1 hit in cache line 0 as
-well as cache line 30. The secret cannot be uniquely recovered. {{< /caption >}}
+{{<caption >}} The victim accesses secret 0, we receive an L1 hit in cache line
+0 as well as cache line 30. The secret cannot be uniquely recovered.
+{{</caption>}}
 
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-all-1.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-all-1.csv.svg)
-{{<caption >}} The victim accesses secret 1, we receive an L2 hit in cache line 0 as
-well as a level 1 hit cache line 30. The secrets cannot be recovered. {{< /caption >}}
+{{<caption >}} The victim accesses secret 1, we receive an L2 hit in cache line
+0 as well as a level 1 hit cache line 30. The secrets cannot be recovered.
+{{</caption >}}
 
 Secrets 24, 25 (fail):
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-all-24.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-all-24.csv.svg)
-{{<caption >}}The victim accesses cache line 24, total noise. {{< /caption >}}
+{{<caption >}} The victim accesses cache line 24, total noise. {{< /caption >}}
 
 [![attack](/blog/2022-09-prefetching-sidechannel/week8-data-m-all-25.csv.svg)](/blog/2022-09-prefetching-sidechannel/week8-data-m-all-25.csv.svg)
 {{<caption >}} Victim accesses cache line 25, total noise.  {{< /caption >}}
 
-All prefetchers enabled seem to screw things up. No secret can be uniquely recovered.
+All prefetchers enabled seem to screw things up. No secret can be uniquely
+recovered.
 
 <!-- However, [every new beginning comes from some other beginning's end](https://youtu.be/xGytDsqkQY8?t=112). -->
 
@@ -244,12 +269,13 @@ the L1 prefetchers.
 **Insight.** Unlike the previous experiment, we no longer use spare cache lines
 to prime the prefetchers.
 
-- Given we only consider L2 prefetchers, we mark a hit in L1 as the leak of the secret. However, this does not easily generalize to the L1 prefetcher.  
+- Given we only consider L2 prefetchers, we mark a hit in L1 as the leak of the
+  secret. However, this does not easily generalize to the L1 prefetcher.
 - Remember from Post 1 that the Stream Prefetcher may prefetch up to 2 cache
   lines following a memory access. The prefetch window can move further ahead
-  (up to circa 30 lines ahead) if we assess contiguous cache lines. To avoid this,
-  we can probe lines with a stride size of 3 lines. If we aim to leak 8 bits we
-  have no spare lines so this insight is not useful.
+  (up to circa 30 lines ahead) if we assess contiguous cache lines. To avoid
+  this, we can probe lines with a stride size of 3 lines. If we aim to leak 8
+  bits we have no spare lines so this insight is not useful.
 - Accessing around 10 contiguous cache lines at the end of a page (lower to higher) seems to
   confuse the L2 Streamer if we then change the direction and probe backward
   (higher to lower in the page).
@@ -286,7 +312,8 @@ Secret 60 (success):
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_60_1.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_60_1.svg)
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_60_2.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_60_2.svg)
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_60_3.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_60_3.svg)
-{{<caption >}}The victim accesses secret cache line 60. We manage to leak the secret byte. More noise in the L2 cache. {{< /caption >}}
+{{<caption >}}The victim accesses secret cache line 60. We manage to leak the
+secret byte. More noise in the L2 cache. {{< /caption >}}
 
 Similar situation for secret byte 60. The attacker manages to leak the byte.
 However, there is much noise in the L2 cache. It seems that the prefetcher loses
@@ -298,7 +325,8 @@ Secret 127 (success):
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_127_1.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_127_1.svg)
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_127_2.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_127_2.svg)
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_127_3.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_127_3.svg)
-{{<caption >}} The victim accesses secret cache line 127. We manage to leak the secret byte. More noise in the L2 cache.  {{< /caption >}}
+{{<caption >}} The victim accesses secret cache line 127. We manage to leak the
+secret byte. More noise in the L2 cache. {{< /caption >}}
 
 Secret 127 shows similar results to secret 60. The prefetcher starts to lose its
 confusion and starts to massively introduce unwanted cache hits. However, the
@@ -309,7 +337,8 @@ Secret 252 (fail):
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_252_1.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_252_1.svg)
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_252_2.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_252_2.svg)
 [![attack](/blog/2022-09-prefetching-sidechannel/l2_evenodd_252_3.svg)](/blog/2022-09-prefetching-sidechannel/l2_evenodd_252_3.svg)
-{{<caption >}}The victim accesses secret cache line 252. Too much noise. Attack fails.  {{< /caption >}}  
+{{<caption >}}The victim accesses secret cache line 252. 
+Too much noise. Attack fails.  {{< /caption >}}  
 
 The attacker fails to recover secret value 252. The threshold for L1 is not
 accurate enough to distinguish an L1 access from all the noise in the L2 cache.
