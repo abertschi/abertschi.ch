@@ -15,7 +15,8 @@ important role in system performance and their study is important for efficient
 cache side-channel attacks. However, Intel's prefetchers remain poorly
 documented and their inner-workings are mostly obfuscated. While some of the
 results discussed in this post are incomplete and just a mere drop in the ocean,
-I hope they are nonetheless useful for someone interested in the matter. See also [Part 2](/blog/2022/prefetching-side-channel/).
+I hope they are nonetheless useful for someone interested in the matter. See
+also [Part 2](/blog/2022/prefetching-side-channel/).
 
 <!--more-->
 ---
@@ -40,13 +41,14 @@ the access behaviors of a potential victim. Common system workloads are often
 memory-latency bound which is why cache misses play an important role in system
 performance. To reduce cache misses, modern CPUs feature hardware prefetchers to
 reduce DRAM accesses and to hide the latency induced by a cache miss. A
-[prefetcher](https://en.wikipedia.org/wiki/Cache_prefetching) is a piece of hardware in the CPU which watches DRAM memory access
-patterns and tries to predict the next pieces of memory needed. It then
-_pre-fetches_ these predictions into the cache. Despite their importance, Intel
-manuals only reveal little information about the <cite>inner-workings[^3]
-[^4]</cite> of prefetchers. A better understanding of hardware prefetchers
-contributes to more efficient cache side-channel attacks as hardware prefetchers
-introduce unwanted cache hits.
+[prefetcher](https://en.wikipedia.org/wiki/Cache_prefetching) is a piece of
+hardware in the CPU which watches DRAM memory access patterns and tries to
+predict the next pieces of memory needed. It then _pre-fetches_ these
+predictions into the cache. Despite their importance, Intel manuals only reveal
+little information about the <cite>inner-workings[^3] [^4]</cite> of
+prefetchers. A better understanding of hardware prefetchers contributes to more
+efficient cache side-channel attacks as hardware prefetchers introduce unwanted
+cache hits.
 
 In this post I will document some findings on the prefetching behavior of an
 Intel Coffee Lake 8th generation CPU (launched in 2017), in particular,  the
@@ -98,11 +100,11 @@ Manual](https://web.archive.org/save/https://www.intel.com/content/dam/www/publi
 Manual, Model Specific Registers](https://web.archive.org/save/https://www.intel.com/content/dam/develop/external/us/en/documents/335592-sdm-vol-4.pdf).
 
 ## Hardware Prefetchers
-If we skim through Intel manuals, we find the presence of four hardware prefetchers <cite>[^3]
-[^4]</cite>. They can be controlled core-individually using the _Model Specific
-Register (MSR)_ at address `0x1A4` using bits 0 to 3 (see Table 2-20, MSR MISC
-FEATURE CONTROL in <cite>_Intel 64 and IA-32 Architectures Software Developer’s
-Manual_ [^4]</cite>).
+If we skim through Intel manuals, we find the presence of four hardware
+prefetchers <cite>[^3] [^4]</cite>. They can be controlled core-individually
+using the _Model Specific Register (MSR)_ at address `0x1A4` using bits 0 to 3
+(see Table 2-20, MSR MISC FEATURE CONTROL in <cite>_Intel 64 and IA-32
+Architectures Software Developer’s Manual_ [^4]</cite>).
 
 I summarize the bits below:
 
@@ -113,8 +115,8 @@ I summarize the bits below:
 
 We can set the MSR register using
 [msr-tools](https://github.com/intel/msr-tools) developed by Intel (now
-discontinued), a facade onto Linux's MSR abstraction `/dev/cpu/<coreid>/msr`. For instance, the command below disables all four prefetchers on
-all cores.
+discontinued), a facade onto Linux's MSR abstraction `/dev/cpu/<coreid>/msr`.
+For instance, the command below disables all four prefetchers on all cores.
 
 ```
 sudo wrmsr -a 0x1a4 0xf
@@ -125,20 +127,23 @@ by Prof. Onur
 Mutlu](https://safari.ethz.ch/architecture/fall2020/lib/exe/fetch.php?media=onur-comparch-fall2020-lecture18-prefetching-afterlecture.pdf).
 
 ### Stream Prefetcher
-A stream prefetcher prefetches multiple +1 cache lines ahead. It typically requires a warm-up phase to confirm an access pattern:
+A stream prefetcher prefetches multiple +1 cache lines ahead. It typically
+requires a warm-up phase to confirm an access pattern:
 
 - A new stream starts at memory access A,
 - the stream direction is determined on access A+1,
 - and finally, the stream is confirmed at access A+2.
 
-Upon confirmation of the stream, the hardware may issue a prefetch to A+3, A+4, 
+Upon confirmation of the stream, the hardware may issue a prefetch to A+3, A+4,
 and so on.
 
 [![stream](/blog/2022-09-prefetching/stream.svg#width70)](/blog/2022-09-prefetching/stream.svg)
 {{<caption >}}  {{< /caption >}}
 
 ### Stride Prefetcher
-A stride prefetcher is similar to a stream prefetcher but allows a variable access stride. So, instead of prefetching several +1 cache lines ahead, a stride prefetcher keeps the state of a stride size N.
+A stride prefetcher is similar to a stream prefetcher but allows a variable
+access stride. So, instead of prefetching several +1 cache lines ahead, a stride
+prefetcher keeps the state of a stride size N.
 
 [![stride](/blog/2022-09-prefetching/stride.svg#width70)](/blog/2022-09-prefetching/stride.svg)
 {{<caption >}}  {{< /caption >}}
@@ -147,8 +152,8 @@ A stride prefetcher is similar to a stream prefetcher but allows a variable acce
 ### Intel Manuals on Prefetching
 There is only sparse official information available on data prefetching. Sparse
 enough to briefly quote the information here. The subsequent text is shortened
-from <cite>_Intel 64 and IA-32 Architectures Optimization
-Reference Manual_ [^3]</cite>. I marked some interesting bits in bold:
+from <cite>_Intel 64 and IA-32 Architectures Optimization Reference Manual_
+[^3]</cite>. I marked some interesting bits in bold:
 
 {{< details "Chapter 2.3.5.4, _Intel 64 and IA-32 Architectures Optimization Reference Manual_">}}
 
@@ -177,12 +182,14 @@ Reference Manual_ [^3]</cite>. I marked some interesting bits in bold:
 
 ## Experiments
 In this section, we will run experiments to verify some of the behavior we
-received from Intel manuals. The experiments are executed on the aforementioned CPU and pinned to a single core using [taskset](https://man7.org/linux/man-pages/man1/taskset.1.html).
+received from Intel manuals. The experiments are executed on the aforementioned
+CPU and pinned to a single core using
+[taskset](https://man7.org/linux/man-pages/man1/taskset.1.html).
 
 The experiments follow a _Flush and Reload_ protocol:
 
-1. We allocate a probing array of contiguous memory using _mmap_, it has the size
-of a multiple of a page size, e.g. 3 x 4KB. This is our _probing array_.
+1. We allocate a probing array of contiguous memory using _mmap_, it has the
+size of a multiple of a page size, e.g. 3 x 4KB. This is our _probing array_.
 2. We then flush the entire _probing array_ to ensure that no cache line is the
 cache using _clflush_.
 3. We then performed the desired sequence of memory access.
@@ -276,27 +283,32 @@ a 4K page. We disable all prefetchers except Streamer.
 >
 > -- Intel 64 and IA-32 Architectures Optimization Reference Manual
 
-We access several cache lines in sequence (green) and probe the array for
-hits introduced by the prefetcher (red). Cache misses are marked in gray.
+We access several cache lines in sequence (green) and probe the array for hits
+introduced by the prefetcher (red). Cache misses are marked in gray.
 
 In the graphs depicted below, we can clearly see that no prefetching occurs
 across a 4KB page boundary, despite the access of cache lines 50 to 63. This is
-consistent with the information we found. Interestingly, the first two
-cache lines of every page in the probing array are always prefetched (why so?).
+consistent with the information we found. Interestingly, the first two cache
+lines of every page in the probing array are always prefetched (why so?).
 
 [![l2stream_pageboundary1](/blog/2022-09-prefetching/page_boundary_50_a.png)](/blog/2022-09-prefetching/page_boundary_50_a.png)
 {{<caption >}} Probe cache lines 50 to 54 (green), prefetching of cache line until 60 (red). {{< /caption >}}
 
 [![l2stream_pageboundary2](/blog/2022-09-prefetching/page_boundary_50_60.png)](/blog/2022-09-prefetching/page_boundary_50_60.png)
-{{<caption >}} Probe cache lines 50 to 59 (green), prefetching of cache line until 65 (red) (prefetched until 63, and page-boundary always prefetched (64, 65 as well as 0, 1)) {{< /caption >}}
+{{<caption >}} Probe cache lines 50 to 59 (green), prefetching of cache line
+until 65 (red) (prefetched until 63, and page-boundary always prefetched (64, 65
+as well as 0, 1)) {{< /caption >}}
 
 [![l2stream_pageboundary3](/blog/2022-09-prefetching/page_boundary_50_63.png)](/blog/2022-09-prefetching/page_boundary_50_63.png)
 {{<caption >}} Probe cache lines 50 to 63. No prefetching across a page boundary. {{< /caption >}}
 
-What happened is that we initiated a new stream, determined its direction, and confirmed the access pattern so that L2 Streamer started to prefetch multiple +1 cache lines ahead. The prefetching stops at the page boundary. This is consistent with the manual. 
+What happened is that we initiated a new stream, determined its direction, and
+confirmed the access pattern so that L2 Streamer started to prefetch multiple +1
+cache lines ahead. The prefetching stops at the page boundary. This is
+consistent with the manual.
 
-However, it remains unclear why we receive a cache hit in the first two
-cache lines of every page.
+However, it remains unclear why we receive a cache hit in the first two cache
+lines of every page.
 
 ### L2 Streamer: Prefetch Aggressiveness
 Regarding the number of lines to prefetch ahead, the manual reads the following bits:
@@ -308,13 +320,16 @@ Regarding the number of lines to prefetch ahead, the manual reads the following 
 >
 > -- Intel 64 and IA-32 Architectures Optimization Reference Manual
 
-The experiments shown below demonstrate prefetching behavior following a linear access pattern. We notice L2 Streamer prefetching starting with the second memory access.
+The experiments shown below demonstrate prefetching behavior following a linear
+access pattern. We notice L2 Streamer prefetching starting with the second
+memory access.
 
 
 [![stream](/blog/2022-09-prefetching/init_prefetch_1.png)](/blog/2022-09-prefetching/init_prefetch_1.png)
-{{<caption >}}L2 Streamer, One memory access, no prefetching {{< /caption >}}
+{{<caption >}}L2 Streamer, One memory access, no prefetching {{</caption >}}
 [![stream](/blog/2022-09-prefetching/init_prefetch_2.png)](/blog/2022-09-prefetching/init_prefetch_2.png)
-{{<caption >}}L2 Streamer, 2 memory accesses, 2 cache lines prefetched {{< /caption >}}
+{{<caption >}}L2 Streamer, 2 memory accesses, 2 cache lines prefetched
+{{</caption >}}
 
 
 [![stream](/blog/2022-09-prefetching/init_prefetch_3.png)](/blog/2022-09-prefetching/init_prefetch_3.png)
@@ -328,9 +343,11 @@ times so they may hit the L3 cache.
 
 
 [![stream](/blog/2022-09-prefetching/stride_1_15.png)](/blog/2022-09-prefetching/stride_1_15.png)
-{{<caption >}}L2 Streamer, 15 memory accesses, 17 cache lines prefetched {{< /caption >}}
+{{<caption >}}L2 Streamer, 15 memory accesses, 17 cache lines prefetched
+{{</caption >}}
 [![stream](/blog/2022-09-prefetching/stride_1_30.png)](/blog/2022-09-prefetching/stride_1_30.png)
-{{<caption >}}30 Streamer, 30 memory accesses, 32 cache lines prefetched {{< /caption >}}
+{{<caption >}}30 Streamer, 30 memory accesses, 32 cache lines prefetched
+{{</caption >}}
 
 For different linear access strides larger than 2, we consistently
 see two consecutive cache lines prefetched. 
@@ -341,19 +358,26 @@ the information we found online.
 
 
 [![stream](/blog/2022-09-prefetching/stride_4.png)](/blog/2022-09-prefetching/stride_4.png)
-{{<caption >}}L2 Streamer, Linear access pattern with stride size of 4. Each access causes 2 additional prefetches. {{< /caption >}}
+{{<caption >}}L2 Streamer, Linear access pattern with stride size of 4. Each
+access causes 2 additional prefetches. {{< /caption >}}
 
 [![stream](/blog/2022-09-prefetching/stride_9.png)](/blog/2022-09-prefetching/stride_9.png)
-{{<caption >}}L2 Streamer, Linear access pattern with stride size of 9. Each access causes 2 additional prefetches. {{< /caption >}}
+{{<caption >}}L2 Streamer, Linear access pattern with stride size of 9. Each
+access causes 2 additional prefetches. {{< /caption >}}
+
 [![stream](/blog/2022-09-prefetching/stride_32.png)](/blog/2022-09-prefetching/stride_32.png)
-{{<caption >}}L2 Streamer, Linear access pattern with stride size of 32. Each access causes 2 additional prefetches. {{< /caption >}}
+{{<caption >}}L2 Streamer, Linear access pattern with stride size of 32. Each
+access causes 2 additional prefetches. {{< /caption >}}
 
 
 ### L2 Adjacent: Prefetch on a 128 bytes boundary
 The adjacent L2 cache line prefetcher prefetches one additional cache line such
-that two cache lines on a 128 bytes boundary are always in the cache. Put differently, the manual reads:
+that two cache lines on a 128 bytes boundary are always in the cache. Put
+differently, the manual reads:
 
-> [L2 Adjacent] This prefetcher strives to complete every cache line fetched to the **L2 cache with the pair line that completes it to a 128-byte aligned chunk.**
+> [L2 Adjacent] This prefetcher strives to complete every cache line fetched to
+> the **L2 cache with the pair line that completes it to a 128-byte aligned
+> chunk.**
 >
 > -- Intel 64 and IA-32 Architectures Optimization Reference Manual
 
@@ -361,14 +385,14 @@ that two cache lines on a 128 bytes boundary are always in the cache. Put differ
 <!-- 43, and if we access cache line 37, the 128 byte boundary includes cache -->
 <!-- line 36.  -->
 
-This is demonstrated with the following two experiments. All
-prefetchers except the L2 Adjacent are disabled.
+This is demonstrated with the following two experiments. All prefetchers except
+the L2 Adjacent are disabled.
 
 [![l2adj1](/blog/2022-09-prefetching/adjacent_1.png)](/blog/2022-09-prefetching/adjacent_1.png)
-{{<caption >}} {{< /caption >}}
-
 [![l2adj2](/blog/2022-09-prefetching/adjacent_2.png)](/blog/2022-09-prefetching/adjacent_2.png)
-{{<caption >}} Prefetch behavior of L2 Adjacent Prefetcher. Behavior is ahead as well behind, depending on the 128 bytes alignment of the cache line accessed.{{< /caption >}}
+{{<caption >}} Prefetch behavior of L2 Adjacent Prefetcher. Behavior is ahead as
+well behind, depending on the 128 bytes alignment of the cache line
+accessed.{{</caption >}}
 
 The L2 Adjacent cache line prefetcher seems to consistently prefetch one cache
 line on every access.
@@ -377,7 +401,8 @@ line on every access.
 <!-- 128 bytes boundary. -->
 
 ## Summary
-As for the remaining two L1 prefetchers I currently do not have reliable results to blog about. To summarize, we discussed the following findings:
+As for the remaining two L1 prefetchers I currently do not have reliable results
+to blog about. To summarize, we discussed the following findings:
 
 _1. Find out which prefetchers are available on my hardware_ 
 
@@ -392,8 +417,8 @@ _2. If a prefetcher is active, how large is the prefetch size_
   instead of L2.
 - The L2 Adjacent Cache Line prefetcher always prefetches one additional cache line, such that 2 cache lines are 128 bytes aligned.  
 - The L1 Hardware and IP prefetchers are still uncovered in this blog post. The
-received results are imprecise. These prefetchers include a streamer and a
-stride prefetcher.
+  received results are imprecise. These prefetchers include a streamer and a
+  stride prefetcher.
 
 _3. And which memory accesses do and do not trigger a prefetch_
 - The L2 Stream prefetcher is triggered after accessing 2 consecutive cache
@@ -410,7 +435,10 @@ a black-box and the results shown in this post are drop in the ocean. I hope
 that these insights will help me to more often look across levels of
 abstractions and to better understand why things work the way they do.
 
-[Part 2](/blog/2022/prefetching-side-channel/) will use this information here and will try to build a cache side-channel attack with a minimal buffer size (e.g. solely 256 cache lines instead of many pages) and a custom access pattern to avoid unwanted prefetches. Stay tuned :)
+[Part 2](/blog/2022/prefetching-side-channel/) will use this information here
+and will try to build a cache side-channel attack with a minimal buffer size
+(e.g. solely 256 cache lines instead of many pages) and a custom access pattern
+to avoid unwanted prefetches. Stay tuned :)
 
 Thanks for reading   
 -- bean
@@ -421,14 +449,19 @@ The following work from academia includes some interesting readings:
 <cite>Rohan et al.[^streamer]</cite> studied the stream direction, trigger, and
 prefetch degree of L2 Hardware Prefetcher (Streamer) in experiments running
 multiple threads on the same physical core. <cite>Wang et al.[^wang]</cite>
-analyzed prefetching and replacement policy on several CPUs and further designed a
-prime and probe attack that minimizes the impact of prefetching.
+analyzed prefetching and replacement policy on several CPUs and further designed
+a prime and probe attack that minimizes the impact of prefetching.
 
 
-[^streamer]: Rohan, Aditya and Panda, Biswabandan and Agarwal, Prakhar, 2020, [Reverse Engineering the Stream Prefetcher for Profit](https://ieeexplore.ieee.org/document/9229804),
-2020 IEEE European Symposium on Security and Privacy Workshops (EuroS PW)
+[^streamer]: Rohan, Aditya and Panda, Biswabandan and Agarwal, Prakhar, 2020,
+[Reverse Engineering the Stream Prefetcher for
+Profit](https://ieeexplore.ieee.org/document/9229804), 2020 IEEE European
+Symposium on Security and Privacy Workshops (EuroS PW)
 
-[^wang]: Wang, Daimeng and Qian, Zhiyun and Abu-Ghazaleh, Nael and Krishnamurthy, Srikanth V, 2019, [PAPP: Prefetcher-Aware Prime and Probe Side-channel Attack](https://ieeexplore.ieee.org/document/8806941), 2019 56th ACM/IEEE Design Automation Conference (DAC)
+[^wang]: Wang, Daimeng and Qian, Zhiyun and Abu-Ghazaleh, Nael and
+    Krishnamurthy, Srikanth V, 2019, [PAPP: Prefetcher-Aware Prime and Probe
+    Side-channel Attack](https://ieeexplore.ieee.org/document/8806941), 2019
+    56th ACM/IEEE Design Automation Conference (DAC)
 
 
 ## Credits
