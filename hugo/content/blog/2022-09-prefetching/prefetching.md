@@ -202,7 +202,7 @@ of the experiment. Also, remember that the granularity of a cache line is 64
 bytes on Intel CPUs.
 
 
-{{< details "A code sample that illustrates the protocol of the experiments is attached here.">}}
+{{< details "A code sample that illustrates the protocol.">}}
 ```c
 /*
 * Sample code snippet to illustrate the gist of the timing measurements.
