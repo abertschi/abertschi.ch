@@ -66,7 +66,7 @@ excerpts from the report.
 ![img5](/blog/2020_graalphp/image_2020-09-02_19-16-51.png)
 
 
-## Press Coverage and Discussions
+## Web Coverage and Discussions
 - [Hackernews](https://news.ycombinator.com/item?id=24565930)
 - [Phoronix.com](https://www.phoronix.com/news/GraalPHP-GraalVM-PHP)
 - [Reddit](https://www.reddit.com/r/PHP/comments/j22xje/859_php_performance_improvement_from_php_7_and/)

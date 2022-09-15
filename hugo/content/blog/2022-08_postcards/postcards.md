@@ -25,26 +25,26 @@ hundreds of cards. Some more unusual than others.
 
 ## Background
 The Swiss Postal Service offers a free service to send postcards within
-Switzerland in their Android/iOS apps. Swiss residents with a [SwissPass]() are
+Switzerland in their Android/iOS apps. Swiss residents with a _SwissPass_ are
 eligible to register at
 [https://service.post.ch](https://service.post.ch/pccweb/public/ui/view/home?shortcut=postcardcreator)
 to design and send postcards online. Their service includes a free postcard
-every 24 hours. However, this service is hidden in their Android/iOS apps and
+every 24 hours. However, it is hidden in their Android/iOS apps and
 only accessible there. 
 
-The aim of this project is to reverse these apps and build an API wrapper to
+This project aims to reverse these apps and build an API wrapper to
 then automate and expose this functionality. 
 
 ## The Project
-The project consists of three components. An [REST API wrapper](), a
-[command-line application]() and a [demo application]() to receive cards from
-stranges online.
+The project consists of three components. A _REST API wrapper_, a
+_command-line application_, and a _demo application_  to receive cards from
+strangers online.
 
 
 ### REST API Wrapper
 The API wrapper is written in Python and implements authentication modes with
 username/password (now discontinued) and SwissID SAML/OAuth authentication.
-As far as I can tell, no counter measures are implemented to hinder the endpoint
+As far as I can tell, no countermeasures are implemented to hinder the endpoint
 reversing. OAuth follows an Authorization Code Flow with a [Proof Key for Code
 exchange (PKCE)](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce).
 
@@ -76,8 +76,8 @@ with different modes including:
 - Bulk sending cards from a folder,
 - Slicing a picture into tiles of many cards,
 - Sending stock images,
-- Sending quotes of _Chuck Norris_,
-- Sending random pictures from the internet (no filtering, may not be SFW)
+- Sending quotes of _Chuck Norris_ (be aware, his first program was kill -9!),
+- Sending random pictures from the internet (no filtering, may not be SFW).
 
 
 <!-- ```bash -->
@@ -95,16 +95,17 @@ You find the command-line application on [GitHub](https://github.com/abertschi/p
 ### Receiving Cards from Strangers
 [Postcard-love](https://postcard.abertschi.ch/) is a small web application to
 upload an image and write some text. Cards uploaded on the site are then
-enqueued and sent to my home address using the aforementioned projects.
+enqueued and sent to my home address using the aforementioned projects. 
 
 [![postcards](/blog/2022-08_postcards/postcard-love.png)](https://github.com/abertschi/postcard-love/blob/master/.assets/postcard-love-ui.pdf)
-{{<caption >}} Webapp to send free cards. See more design assets and the source-code
+{{<caption >}} Webapp to send free cards. See more design assets and the source code
 [here](https://github.com/abertschi/postcard-love/blob/master/.assets/postcard-love-ui.pdf).{{<
 /caption >}}
 
 <!-- I integrated nudity detection to exclude inappropriate content to be sent out.  -->
 
-## Shout Outs
+## Shout-Outs
+In the next paragraphs, I will highlight some of the cards received.
 
 I want to shout out to _truck driver Ahramov_. Whether you are real or not,
 thanks for the message! I hope the _gud truck_ still drives :).
@@ -118,7 +119,7 @@ zis is se truck in se uzbekiztan. itz not mi truck but gud truck frm the sovjet,
 {{<caption >}} truck drivr ahramov's truck.{{< /caption >}}
 
 
-Also a shout out to this gentleman, who took corona measures very cautionarily
+Also a shout-out to this gentleman, who took corona measures very cautionary
 :). Thanks for all the love, stay healthy!
 
 ```
@@ -144,14 +145,15 @@ Thanks a lot :)
 
 ## Conclusion
 
-From cute cat pictures, landscape and architecture, obscure images, selfies, and even a request for date, I received many postcards. 
+From cute cat pictures, landscape and architecture, obscure images and trash,
+selfies, and even a request for a date, I received many postcards.
 
 > A smile is happiness you'll find right under your nose.   
 > -- Tom Wilson  
 
 The reverse engineering work of this project has been much fun, almost as much
-fun as receiving the cards. Thank you everyone for playing along and making me,
-the postman and my roommates smile.
+fun as receiving the cards. Thanks everyone for playing along and making me, the
+postman, and my roommates smile.
 
 
 

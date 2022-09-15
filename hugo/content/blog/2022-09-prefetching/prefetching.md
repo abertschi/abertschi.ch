@@ -1,5 +1,5 @@
 ---
-title: "Battling the Prefetcher: Exploring Coffee Lake (part 1)"
+title: "Battling the Prefetcher: Exploring Coffee Lake"
 date: "2022-09-05"
 slug: "prefetching"
 draft: false
@@ -177,7 +177,7 @@ Reference Manual_ [^3]</cite>. I marked some interesting bits in bold:
 
 ## Experiments
 In this section, we will run experiments to verify some of the behavior we
-received from Intel manuals. The experiments are executed on the aforementioned CPU.
+received from Intel manuals. The experiments are executed on the aforementioned CPU and pinned to a single core using [taskset](https://man7.org/linux/man-pages/man1/taskset.1.html).
 
 The experiments follow a _Flush and Reload_ protocol:
 
@@ -201,7 +201,7 @@ of the experiment. Also, remember that the granularity of a cache line is 64
 bytes on Intel CPUs.
 
 
-{{< details "A code sample that illustrates the protocol of the experiments is attached here.">}}
+{{< details "A code sample that illustrates the protocol.">}}
 ```c
 /*
 * Sample code snippet to illustrate the gist of the timing measurements.
@@ -410,9 +410,7 @@ a black-box and the results shown in this post are drop in the ocean. I hope
 that these insights will help me to more often look across levels of
 abstractions and to better understand why things work the way they do.
 
-An upcoming post will use this information here _to try  to build_ a cache
-side-channel attack with a minimal buffer size (e.g. solely 256 cache lines instead of many pages) and
-a custom access pattern to avoid unwanted prefetches. Stay tuned :)
+An upcoming post will use this information here and will try to build a cache side-channel attack with a minimal buffer size (e.g. solely 256 cache lines instead of many pages) and a custom access pattern to avoid unwanted prefetches. Stay tuned :)
 
 Thanks for reading   
 -- bean

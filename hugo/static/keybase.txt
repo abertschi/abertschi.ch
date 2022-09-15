@@ -1,0 +1,66 @@
+==================================================================
+https://keybase.io/abertschi
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://abertschi.ch
+  * I am abertschi (https://keybase.io/abertschi) on keybase.
+  * I have a public key with fingerprint 802D C252 BAD6 16B0 2B01  11BD 7F19 4C1D 492A 4B11
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101a84fdc41470695ebf266f467eefb4ef1856b6d9e9dd216acc2433029f6baa1360a",
+            "fingerprint": "802dc252bad616b02b0111bd7f194c1d492a4b11",
+            "host": "keybase.io",
+            "key_id": "7f194c1d492a4b11",
+            "kid": "0101a84fdc41470695ebf266f467eefb4ef1856b6d9e9dd216acc2433029f6baa1360a",
+            "uid": "53037d561ba892098173838c19fd4719",
+            "username": "abertschi"
+        },
+        "service": {
+            "hostname": "abertschi.ch",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1470387220,
+    "expire_in": 157680000,
+    "prev": "9d8a2dd9a64927583244010bb60cd003e86b6a9fa6d4c51fe5003d426ea47078",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owGtUltIFUEY3pNpdVSUqFBSsi0oymRnL7O7xyi0zNTohlj50GlmZ/a4aeec9qyn
+JE8UGWElmRJJSUYJamlPFdENzBQqoiKsCLqBFRKRDxLdyGalXqLH5mWYf77v+7//
+429MjuO8njf6xaslsdlfPfeGMbehvTRtF49DpIb37eIr6fhFqwiNOP5Ki/A+XgAC
+QJpsEkMGsipAXaHYFCE0ZahSamKZmkBTIIZEpzohIoDIMERZkgRRNyFGCEhQQHw2
+b1rBALXDthV0mKwmiMQQFREjAgHEgogFAAAmqgl02QBE1kUkYwAYsSIUcRnMHEYR
+mmOFWI09/OP2/oH/z76rx+UUSZBUokCAkaaLgq4BVdIkzQC6SWQV6C4wQu0g2kYZ
+GmFqOxGjwuJj2TwrRy2Dusm6o/wNyTEqGDlsh5yQEapiPxWOE/a5RKcm7CJ3UOz/
+reHHVpCwHBkhSu2IFQryPsCQhmO5ou6gkqaKopDN051hy6Z+y0UoKtQEdtw2NMok
+daIhkZCNOoIsOFXRJFGWWWIYQ8EggiBRjSWDdBNBIhsKMKnCikQWIUWsh6rx7ljb
+gyHeJzOfKMA0I1YgiJxqm/Ixb70nYyLn8XIJ8RPcDeO8U1L/rN3I8UljBWdrFo/l
+zZrFHe7r2Hfqkf/+qrsllc2jOWN1TbvvFGelPG3c8moeLuxqO30o8X1LXtLHCyUv
++170nk3b/H3yxt25bwdvrVBp9FN679Cn5oVZ+6eV5wdqPdz2221c74H4tJ+f0ei1
+Ae35FXF14ePSwSOBH2Ut07vPLV3Q0Qn3xR4OP2tPvZRz/tvC7g8T+tcv61l0fQ0t
+v3lw0/z64vTrs/v7TiTXHWtKmLR1xtymUXvO5bar1ck7a1Oir2vbvqR5y+Oth41q
+0c/RMw0P9q7szIzGBgsyp089WdbT8C78rGgkaUncqbysoVtxXfnLW1tbb3ADdYmv
+Zg4+8a3bMzCxfyQ1pSAj9+jaXw==
+=rGQf
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/abertschi
+
+==================================================================

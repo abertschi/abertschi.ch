@@ -1,5 +1,5 @@
 ---
-title: "Overengineering my website with Easter Eggs"
+title: "Easter Eggs on abertschi.ch"
 slug: "overengineering-my-website-with-easter-eggs"
 draft: false
 date: "2022-08-20"
@@ -13,11 +13,11 @@ into the intro page of this website. You can try it out at the root site of
 ---
 
 ## Background
-I finally found the time to add some Easter Eggs to the intro site of my
-personal website. This is a small project I have wanted to build for a few
-years, but never found the time. The website is a conjunction of a static site
-generator and a self-built intro page. The site works just fine without
-JavaScript and contains little styling, inspired [by this ludicrous
+I finally found the time to add some Easter eggs to the intro site of my
+website. This is a small project I have wanted to build for a few years but
+never found the time. The website is a conjunction of a static site generator
+and a self-built intro page. The site works just fine without JavaScript and
+contains little styling, inspired [by this ludicrous
 website](http://bettermotherfuckingwebsite.com/) (which has some fair points)
 and [this](https://github.com/HermanMartinus/bearblog/) blog framework.
 
@@ -30,7 +30,7 @@ not Org.
 
 
 The intro page at the root of this domain is self-built with `TypeScript`,
-`Vue.js` and a `Golang` REST backend in `Gin`. It features a small `TypeScript`
+`Vue.js`, and a `Golang` REST backend in `Gin`. It features a small `TypeScript`
 app (~ 600 loc) with a conversational chat interface. The golang backend is
 containerized with `Docker` and exposed to the interwebs with `Nginx`.
 
@@ -56,14 +56,14 @@ history...: see what you accomplished
 ```
 {{< caption >}}Excerpt from chat interface.{{< /caption >}}
 
-The chat interface uses `LocalStorage` to keep track of the chat history and
-implements local and remote commands. Local commands are implemented in
-TypeScript in the browser. If no local command is matched, the browser sends the
-chat message to the server, where the server generates a chat response. This
-architecture is motivated not to spoil some Easter eggs implemented on the site.
+The chat interface keeps track of the chat history and implements local and
+remote commands. Local commands are implemented in the browser. If no local
+command is matched, the browser sends the chat message to the server, where it
+receives a server-generated response. This architecture is motivated not to
+spoil some Easter eggs implemented on the site.
 
 ## Easter Eggs are Stages
-The Easter Eggs are implemented in _Stages_ on the server.
+The Easter eggs are implemented in _Stages_ on the server.
 ```go
 type StageHandler interface {
   CanHandle(stage string) bool
@@ -73,11 +73,10 @@ type StageHandler interface {
   FormulateSummary() Response
 }
 ```
-{{< caption >}}Each Easter Egg is implemented with a StageHandler.{{< /caption >}}
-
+{{< caption >}}Each egg is implemented with a StageHandler.{{< /caption >}}
 
 Each _stage_ decides if it `CanHandle` the current request, and if so, what
-`Response` it will formulate (`FormulateReply`). This allows for server side
+`Response` it will formulate (`FormulateReply`). This allows for server-side
 rendering of HTML code which can subsequently be shown on the client. To
 formulate a reply, a stage receives a messaging context of the last N questions
 asked.
@@ -94,19 +93,16 @@ type ResponseEntry struct {
 ```
 {{< caption >}}A server response can embed HTML on the client.{{< /caption >}}
 
-A server `Response` contains text and HTML code and a `Stage` identifier. The
+A server `Response` can contain text, HTML code, and a`Stage` identifier. The
 client then includes the stage in subsequent requests until the stage is solved
-and the server replies with a new Easter Egg. If no _Stage_ is present, the
-server will start with the first Easter Egg. This simple design encapsulates an
-Easter Egg from the rest of the server code and allows to easily add more Easter
-Eggs.
+and the server replies with a new Easter egg. This simple design encapsulates an
+implementation of an Easter egg from the rest of the server code.
 
-## Try it Out
+## Conclusion
 
-Try it out at https://abertschi.ch. I will add some more eggs if I find the
-time. The frontend code is open-sourced on
-[GitHub](https://github.com/abertschi/abertschi.ch). However, I will keep the
-server code and the Easter Eggs hidden for now :).
+This small project has been fun to build. You can try it out at https://abertschi.ch.
+I may add some more eggs if I find the time. You find the frontend code on
+[GitHub](https://github.com/abertschi/abertschi.ch).
 
 Thanks for reading.  
 -- bean

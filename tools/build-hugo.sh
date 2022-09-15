@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 readonly PROJ_ROOT=$SCRIPT_DIR/../

@@ -3,23 +3,38 @@
             <li class="command">HI THERE,</li>
             <li class="command">WELCOME TO <a href="#">ABERTSCHI.CH</a>.</li>
             <li class="command">MY NAME IS <b>BERTSCHI, ANDRIN</b> A.K.A. <b>BEAN</b>.</li>
-            <li class="command">I AM A PASSIONATE <b>SOFTWARE ENGINEER</b>, <span class="linebreak"/></li>
+            <li class="command">I AM A PASSIONATE SOFTWARE ENGINEER, <span class="linebreak"/></li>
             <li class="command">CURRENTLY PURSUING A MASTER'S DEGREE <span class="linebreak"/></li>
-            <li class="command">IN <b>COMPUTER SCIENCE</b> AT ETH ZURICH, SWITZERLAND.</li>
+            <li class="command">IN COMPUTER SCIENCE AT ETH ZURICH, SWITZERLAND.</li>
             <li class="command"><br/></li>
-            <li class="command">I AM INTERESTED IN <b>SYSTEM SECURITY</b> AND <span class="linebreak"/> </li>
-            <li class="command"><b>SOFTWARE ENGINEERING.</b> </li>
+            <li class="command">I AM INTERESTED IN SYSTEM SECURITY AND <span class="linebreak"/> </li>
+            <li class="command">SOFTWARE ENGINEERING. </li>
             <li class="command"><br/></li>
             <li class="command">SOME THINGS TO DO ON THIS SITE:<br/></li>
             <li class="command">- SEND ME <a target="_blank" href="https://postcard.abertschi.ch">A POSTCARD</a></li>
             <li class="command">- READ MY <a href="/blog">BLOG</a></li>
-            <li class="command">- REACH OUT TO ME AT SAYHI@ABERTSCHI.CH
-            </li>
+            <li class="command">- REACH OUT TO ME AT SAYHI@ABERTSCHI.CH <a href="/andrinbertschi.pub.asc">(PGP)</a></li>
             <li class="command">- BROWSE MY <a href="/cv">CV</a></li>
             <li class="command">- FOLLOW ME ON <a target="_blank" href="https://www.github.com/abertschi">GITHUB</a> OR <a target="_blank" href="https://www.twitter.com/andrinbertschi">TWITTER</a></li>
             <li class="command"><br/></li>
         </ul>
 </div>
+<script>
+    // optimize: prevent text from briefly flashing up
+    let cx = document.querySelector("#intro").children || [];
+    console.log(cx)
+    for (const c of cx) {
+        c.style.visibility = 'hidden'
+    }
+</script>
+<style>
+    ul {
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+</style>
 
 <div id="app">
 </div>

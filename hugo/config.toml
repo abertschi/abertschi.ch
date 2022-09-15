@@ -13,12 +13,14 @@ enableRobotsTXT = true
 
 publishDir = "../public"
 
+
+ignoreFiles = ['\.ignore$', 'tmp$']
+
 disableKinds = ["taxonomy"]
 ignoreErrors = ["error-disable-taxonomy"]
 [permalinks]
   blog = "/blog/:year/:slug/"
   tags = "/blog/:slug"
-
 [params]
   description = "abertschi.ch's personal corner of the interwebs."
 

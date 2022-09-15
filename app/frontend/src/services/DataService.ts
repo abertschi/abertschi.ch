@@ -5,6 +5,7 @@ const URL = process.env.VUE_APP_BACKEND_HOST + ":" + process.env.VUE_APP_BACKEND
 
 const http: AxiosInstance = axios.create({
     baseURL: URL,
+    timeout: 5000,
     headers: {
         "Content-type": "application/json",
     },
@@ -76,6 +77,11 @@ class DataService {
                 return this._formatErrorResponse(r.status)
             }
         }, (error) => this._formatErrorResponse(error.status))
+            .catch(e => {
+                    console.log(e)
+                    return this._formatErrorResponse(0)
+                }
+            )
     }
 
     getHistory(): Promise<MessageResponse> {
@@ -99,7 +105,12 @@ class DataService {
                 } else {
                     return this._formatErrorResponse(r.status)
                 }
-            }, (error) => this._formatErrorResponse(error.status));
+            }, (error) => this._formatErrorResponse(error.status))
+            .catch(e => {
+                    console.log(e)
+                    return this._formatErrorResponse(0)
+                }
+            )
     }
 }
 

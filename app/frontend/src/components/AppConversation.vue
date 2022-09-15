@@ -51,7 +51,7 @@ export default defineComponent({
 
     window.addEventListener('click', this.skipTyping);
     window.addEventListener('touchend', this.skipTyping);
-    window.addEventListener("keypress", this.skipTyping);
+    window.addEventListener("keypress", this.skipTypingKeyPress);
 
     this._setTypingAnimationDefault()
     // this._placeholderHintAnimation()
@@ -62,6 +62,7 @@ export default defineComponent({
     return {
       inputTextPlaceholder: 'and more ...' as string,
       inputText: '' as string,
+      rejectEnter: false,
       showInput: false,
       stop: false,
       initialDialog: true,
@@ -76,6 +77,19 @@ export default defineComponent({
     }
   },
   methods: {
+    _formatDate(date: Date) {
+      let y = date.getFullYear(),
+          m = date.getMonth() + 1,
+          d = date.getDate(),
+          hour = date.getHours(),
+          minute = date.getMinutes(),
+          hourFormatted = hour % 12 || 12,
+          minuteFormatted = minute < 10 ? "0" + minute : minute,
+          morning = hour < 12 ? "am" : "pm";
+
+      return y + "-" + m + "-" + d + " "
+          + hourFormatted + ":" + minuteFormatted + morning;
+    },
     _scrollToBottomOfPage() {
       window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     },
@@ -89,20 +103,25 @@ export default defineComponent({
       return div.innerHTML;
     },
     onTextEnter() {
+      if (this.isTyping || this.rejectEnter) {
+        return
+      }
       PersistenceService.markLastUsage()
-      let escaped = this._escapeHTML(this.inputText)
+      let escaped = this._escapeHTML(`[${this._formatDate(new Date())}]: ` + this.inputText)
       this.questionCtx.push(escaped)
       let msg = `<i style="opacity: 0.4; font-size: 13px;">${escaped}</i>`
       this._addConversation(msg)
       this._createAndInsertLi(ID_INTRO, msg)
 
       let that = this
+      this.rejectEnter = true
       CmdHandler.handle(this.inputText, this.$root as Vue, this.questionCtx).then(r => {
         setTimeout(() => {
           for (const entry of r.responses) {
             if (entry.html != null && entry.html != '') {
               that.typeRows([entry.html], r.save)
             }
+            that.rejectEnter = false
             that.typeRows(entry.sentences, r.save)
           }
         }, 500)
@@ -179,6 +198,11 @@ export default defineComponent({
       waitEndOfLineMs = DEFAULT_WAIT_END_OF_LINE_MS
       waitChar = DEFAULT_WAIT_CHAR
     },
+    skipTypingKeyPress(e: KeyboardEvent) {
+      if (e.key === "Enter") {
+        this.skipTyping(e)
+      }
+    },
     skipTyping(e: Event) {
       if (!this.initialDialog) {
         if (this.isTyping) {
@@ -191,7 +215,7 @@ export default defineComponent({
       this.clearHtmlData(ID_INTRO, true)
       this.stop = true;
       this.typingBufferIndex = this.typingBuffer.length
-      this.showInput = false
+      // this.showInput = false
       this.isTyping = false
 
       for (let i = 0; i < this.typingBuffer.length; i++) {
@@ -214,7 +238,8 @@ export default defineComponent({
       for (let i = 0; i < rx.length; i++) {
         if (rx[i].innerHTML == null) continue
         if (rx[i].innerHTML.indexOf('<span class="typing">|</span>') > -1) {
-          rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>', '');
+          rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>',
+              '<span class="typing"></span>');
         }
       }
     },
@@ -232,7 +257,7 @@ export default defineComponent({
           this._createAndInsertLi(ID_INTRO, this.conversation[i])
         }
       } else {
-        this._scrollToBottomOfPage()
+        // this._scrollToBottomOfPage()
       }
       this.initialDialog = false
       this._setTypingAnimationDefault()
@@ -255,7 +280,7 @@ export default defineComponent({
         return
       }
       this.isTyping = true
-      this.showInput = false
+      // this.showInput = false
       this._removeTypingAnimation(ID_INTRO)
 
       let i = this.typingBufferIndex
@@ -349,7 +374,7 @@ export default defineComponent({
 }
 
 .cmd-intro {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .typing {
@@ -474,8 +499,7 @@ ul {
   border: none;
   margin-left: 10px;
   font-family: 'Ubuntu Mono';
-
-  width: 90%;
+  width: 80%;
 
 }
 

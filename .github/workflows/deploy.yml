@@ -30,12 +30,7 @@ jobs:
       run: |
         make hugo/build
       
-    - name: List output files
-      run: |
-        ls -al
-        ls -al ./public
-        git status
-    
+      
       # sftp action fails with dirty files in repo
       # we must reset these files
       # modified:   app/frontend/package-lock.json
@@ -44,7 +39,13 @@ jobs:
     - name: Prepare SFTP
       run: |
         git reset --hard
-
+    - name: List output files
+      run: |
+        ls -al
+        ls -al ./public
+        ls -al ./public/blog/
+        git status
+    
     - name: deploy
       if: github.ref == 'refs/heads/master'
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
