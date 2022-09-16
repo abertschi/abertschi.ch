@@ -106,7 +106,8 @@ enqueued and sent to my home address using the aforementioned projects.
 <!-- I integrated nudity detection to exclude inappropriate content to be sent out.  -->
 
 ## Shout-Outs
-In the next paragraphs, I will highlight some of the cards received.
+In the next paragraphs, I will highlight some of the cards received. Thanks to
+everyone who made an effort and sent me a card!
 
 I want to shout out to _truck driver Ahramov_. Whether you are real or not,
 thanks for the message! I hope the _gud truck_ still drives :).
