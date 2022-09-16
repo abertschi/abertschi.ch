@@ -23,3 +23,9 @@ export PATH="$PATH:$WRK/"
 rm -rf $PROJ_ROOT/public
 
 hugo --source $HUGO_ROOT --minify
+
+FILE="$PROJ_ROOT/public/sitemap.xml"
+SITEMAP="<url><!-- what could this be.. --><loc>https://abertschi.ch/pdf</loc></url>"
+OLD="</urlset>"
+NEW="${SITEMAP}${OLD}"
+sed -i "s#${OLD}#${NEW}#g" $FILE

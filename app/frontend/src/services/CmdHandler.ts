@@ -18,7 +18,7 @@ export interface CmdHandlerMessageResponse {
     save: boolean
 }
 
-const QUESTION_CTX_SLICE_SIZE = -10
+const QUESTION_CTX_SLICE_SIZE = -20
 
 // eslint-disable-next-line no-unused-vars
 class CmdManager {
@@ -36,6 +36,14 @@ class CmdManager {
     greetBack(date: Date): Array<string> {
         return ['Seems like our paths have already crossed in the past...',
             'Last used on ' + date.toDateString() + '.', '<br/>']
+    }
+
+    encouragement(): Array<string> {
+        return ["The journey of a thousand miles begins with one step.",
+            "I dare you to find the easter eggs on your way " +
+            "(<a target='_blank' href='/blog/2022/overengineering-my-website-with-easter-eggs/'>blog post</a>).",
+            "Good luck.",
+            ""]
     }
 
     _createSimpleResponse(save: boolean, html: string, msgs: Array<string>) {
@@ -123,7 +131,7 @@ class CmdManager {
         };
     }
 
-// eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     async handle(msg: string, vue: Vue, ctx: Array<string> = []):
         Promise<CmdHandlerMessageResponse> {
         for (const h of this.handlers) {

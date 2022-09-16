@@ -8,12 +8,13 @@ tags:
   - programming
   - reversing
 ---
-In this post, I blog about [postcard_creator](https://github.com/abertschi/postcard_creator_wrapper)
-and [postcards](https://github.com/abertschi/postcards). An Android and REST
-endpoint reversing project I started to send free postcards in Switzerland. I built [postcard-love](https://postcard.abertschi.ch), a website to allow
+In this post, I blog about
+[postcard_creator](https://github.com/abertschi/postcard_creator_wrapper) and
+[postcards](https://github.com/abertschi/postcards). An Android and REST
+endpoint reversing project I created to send free postcards in Switzerland. I
+built [postcard-love](https://postcard.abertschi.ch), a website to allow
 strangers to send me postcards for free. Over the past time, I have received
-hundreds of cards. Some more unusual than others. 
-<!--more-->
+hundreds of cards. Some more unusual than others. <!--more-->
 
 
 ![postcards](/blog/2022-08_postcards/postcards.jpg)
@@ -29,11 +30,11 @@ Switzerland in their Android/iOS apps. Swiss residents with a _SwissPass_ are
 eligible to register at
 [https://service.post.ch](https://service.post.ch/pccweb/public/ui/view/home?shortcut=postcardcreator)
 to design and send postcards online. Their service includes a free postcard
-every 24 hours. However, it is hidden in their Android/iOS apps and
-only accessible there. 
+every 24 hours. However, it is hidden in their Android/iOS apps and only
+accessible there.
 
-This project aims to reverse these apps and build an API wrapper to
-then automate and expose this functionality. 
+This project aims to reverse these apps and build an API wrapper that will
+automate and expose this functionality.
 
 ## The Project
 The project consists of three components. A _REST API wrapper_, a
@@ -76,8 +77,8 @@ with different modes including:
 - Bulk sending cards from a folder,
 - Slicing a picture into tiles of many cards,
 - Sending stock images,
-- Sending quotes of _Chuck Norris_ (be aware, his first program was kill -9!),
-- Sending random pictures from the internet (no filtering, may not be SFW).
+- Sending quotes from _Chuck Norris_ (be aware, his first program was kill -9!),
+- Sending random pictures from the internet (without filtering, may not be SFW).
 
 
 <!-- ```bash -->

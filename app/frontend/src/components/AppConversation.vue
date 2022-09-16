@@ -106,6 +106,8 @@ export default defineComponent({
       if (this.isTyping || this.rejectEnter) {
         return
       }
+      const IS_FIRST_MSG = this.conversation.length == 0
+
       PersistenceService.markLastUsage()
       let escaped = this._escapeHTML(`[${this._formatDate(new Date())}]: ` + this.inputText)
       this.questionCtx.push(escaped)
@@ -117,6 +119,9 @@ export default defineComponent({
       this.rejectEnter = true
       CmdHandler.handle(this.inputText, this.$root as Vue, this.questionCtx).then(r => {
         setTimeout(() => {
+          if (IS_FIRST_MSG) {
+            that.typeRows(CmdHandler.encouragement(), true)
+          }
           for (const entry of r.responses) {
             if (entry.html != null && entry.html != '') {
               that.typeRows([entry.html], r.save)
