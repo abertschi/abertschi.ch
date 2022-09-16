@@ -29,10 +29,10 @@ backend for Hugo, but so far I am still writing this blog post in Markdown and
 not Org.
 
 
-The intro page at the root of this domain is self-built with `TypeScript`,
-`Vue.js`, and a `Golang` REST backend in `Gin`. It features a small `TypeScript`
+The intro page at the root of this domain is self-built with TypeScript,
+Vue.js, and a Golang REST backend in Gin. It features a small TypeScript
 app (~ 600 loc) with a conversational chat interface. The golang backend is
-containerized with `Docker` and exposed to the interwebs with `Nginx`.
+containerized with Docker and exposed to the interwebs with Nginx.
 
 The frontend builds with continuous delivery (CD) and deploys itself [upon new
 commits](https://github.com/abertschi/abertschi.ch/actions/workflows/deploy.yml).
