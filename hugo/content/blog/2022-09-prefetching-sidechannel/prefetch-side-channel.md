@@ -118,7 +118,7 @@ probe the victim's memory access for a cache hit. The attacker uses clflush and
 the process is pinned to a core with taskset. We further allow the attacker to
 repeat the experiment as often as we want to increase accuracy. Also, we allow
 the attacker to disable the L1 prefetchers if this helps to increase accuracy.
-The attacker's probing is done in a way that (hopefully :-)) to confuse the
+The attacker's probing is done in a way (hopefully :-)) to confuse the
 prefetcher so it does not to hit the cache and introduce false positives.
 
 ## Experiments
