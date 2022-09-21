@@ -50,8 +50,10 @@ export default defineComponent({
     })
 
     window.addEventListener('click', this.skipTyping);
-    window.addEventListener('touchend', this.skipTyping);
+    window.addEventListener('touchstart', this.skipTyping);
     window.addEventListener("keypress", this.skipTypingKeyPress);
+    // window.addEventListener("touchend", (e)=> e.preventDefault());
+
 
     this._setTypingAnimationDefault()
     // this._placeholderHintAnimation()
