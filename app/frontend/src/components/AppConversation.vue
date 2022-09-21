@@ -213,10 +213,12 @@ export default defineComponent({
         if (this.isTyping) {
           this._setTypingAnimationQuick()
           e.stopPropagation();
+          e.stopImmediatePropagation()
         }
         return
       }
       e.stopPropagation();
+      e.stopImmediatePropagation()
       this.clearHtmlData(ID_INTRO, true)
       this.stop = true;
       this.typingBufferIndex = this.typingBuffer.length
