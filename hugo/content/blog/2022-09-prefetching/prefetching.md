@@ -114,8 +114,7 @@ I summarize the bits below:
 - Bit 3: L1 Data Cache Unit (DCU) IP Prefetcher (Stride Prefetcher)
 
 We can set the MSR register using
-[msr-tools](https://github.com/intel/msr-tools) developed by Intel (now
-discontinued), a facade onto Linux's MSR abstraction `/dev/cpu/<coreid>/msr`.
+[msr-tools](https://github.com/intel/msr-tools) developed by Intel, a facade onto Linux's MSR abstraction `/dev/cpu/<coreid>/msr`.
 For instance, the command below disables all four prefetchers on all cores.
 
 ```
@@ -465,5 +464,4 @@ Symposium on Security and Privacy Workshops (EuroS PW)
 
 
 ## Credits
-I looked into this topic as part of a course in Hardware Security at ETH Zurich.
-Thanks to Michael Roth who worked together with me on the topic.
+Thanks to Michael Roth who worked together with me on the topic. 
