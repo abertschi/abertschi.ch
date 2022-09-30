@@ -94,7 +94,7 @@ $ postcards send --config config.json \
 You find the command-line application on [GitHub](https://github.com/abertschi/postcards).
 
 ### Receiving Cards from Strangers
-[Postcard-love](https://postcard.abertschi.ch/) is a small web application to
+Having the API wrapper implemented, we can now take on to build [Postcard-love](https://postcard.abertschi.ch/), a small web application to
 upload an image and write some text. Cards uploaded on the site are then
 enqueued and sent to my home address using the aforementioned projects. 
 
@@ -104,6 +104,8 @@ enqueued and sent to my home address using the aforementioned projects.
 /caption >}}
 
 <!-- I integrated nudity detection to exclude inappropriate content to be sent out.  -->
+
+Now, all that was left is to wait and see if someone bothered to write a card...
 
 ## Shout-Outs
 In the next paragraphs, I will highlight some of the cards received. Thanks to
