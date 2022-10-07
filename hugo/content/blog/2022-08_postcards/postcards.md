@@ -156,7 +156,7 @@ selfies, and even a request for a date, I received many postcards.
 > -- Tom Wilson  
 
 The reverse engineering work of this project has been much fun, almost as much
-fun as receiving the cards. The projects are activiely maintained and (usually) quickly fixed if soemthing breaks.
+fun as receiving the cards. The projects are activiely maintained and (usually) quickly fixed if something breaks.
 Thanks everyone for playing along and making me, the postman, and my roommates smile.
 
 
