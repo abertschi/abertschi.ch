@@ -51,7 +51,9 @@ that [requests a device
 fingerprint](https://github.com/abertschi/postcard_creator_wrapper/blob/5cc231d59c0096f441037b76e920df5777220447/postcard_creator/token.py#L414),
 possibly to implement some sort of anomaliy detection. For now, a static
 fingerprint does just fine and the authentication succeeds. Time will tell if we
-have to get more creative here in the future. Beside that, OAuth follows an
+have to get more creative here in the future. 
+
+Besides that, OAuth follows an
 Authorization Code Flow with a [Proof Key for Code exchange
 (PKCE)](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce).
 
@@ -62,7 +64,7 @@ from postcard_creator.postcard_creator import PostcardCreator, Postcard, Token, 
 
 token = Token()
 token.fetch_token(username, password)
-token.has_valid_credentials(username, password)
+
 recipient = Recipient(prename, lastname, street, place, zip_code)
 sender = Sender(prename, lastname, street, place, zip_code)
 
@@ -70,7 +72,7 @@ picture = open('./my-photo.jpg', 'rb')
 card = Postcard(message, recipient, sender, picture)
 
 w = PostcardCreator(token)
-w.send_free_card(postcard=card, mock_send=False, image_export=False)
+w.send_free_card(postcard=card)
 ```
 
 You find the API wrapper on
