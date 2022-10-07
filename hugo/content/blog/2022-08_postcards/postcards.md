@@ -51,7 +51,7 @@ that [requests a device
 fingerprint](https://github.com/abertschi/postcard_creator_wrapper/blob/5cc231d59c0096f441037b76e920df5777220447/postcard_creator/token.py#L414),
 possibly to implement some sort of anomaliy detection. For now, a static
 fingerprint does just fine and the authentication succeeds. Time will tell if we
-have to get more creative here in the future. 
+have to get more clever here in the future... 
 
 Besides that, OAuth follows an
 Authorization Code Flow with a [Proof Key for Code exchange
@@ -141,6 +141,18 @@ Stay corona-free! (That's me in the pic FYI lol)
 
 ![postcards](/blog/2022-08_postcards/card.png)
 {{<caption >}} Stay healthy and strong.{{< /caption >}}
+
+Cheers for this beautiful picture of a lake in Belgium.
+
+```
+hello dear,
+this morning i had uploaded your add free tool for spotify on android phone, very good idea you were working on it!
+many thanks for. This picture i shooted two days ago, with the beautiful end of day light, at the place lac de l'eau d'heure' in south of Belgium.
+take care of you.
+```
+
+![postcards](/blog/2022-08_postcards/nature.png#width50)
+{{<caption >}}lac de l'eau d'heure, Belgium{{< /caption >}}
 
 
 And last but not least, a warm thanks for this picture. It's a nice wall :).
