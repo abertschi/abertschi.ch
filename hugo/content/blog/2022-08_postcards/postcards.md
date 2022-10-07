@@ -44,10 +44,16 @@ strangers online.
 
 ### REST API Wrapper
 The API wrapper is written in Python and implements authentication modes with
-username/password (now discontinued) and SwissID SAML/OAuth authentication.
-As far as I can tell, no countermeasures are implemented to hinder the endpoint
-reversing. OAuth follows an Authorization Code Flow with a [Proof Key for Code
-exchange (PKCE)](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce).
+username/password (now discontinued) and SwissID SAML/OAuth authentication. As
+far as I can tell, no countermeasures are implemented to hinder the endpoint
+reversing. However, there is an interesting endpoint in the authentication flow
+that [requests a device
+fingerprint](https://github.com/abertschi/postcard_creator_wrapper/blob/5cc231d59c0096f441037b76e920df5777220447/postcard_creator/token.py#L414),
+possibly to implement some sort of anomaliy detection. For now, a static
+fingerprint does just fine and the authentication succeeds. Time will tell if we
+have to get more creative here in the future. Beside that, OAuth follows an
+Authorization Code Flow with a [Proof Key for Code exchange
+(PKCE)](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-proof-key-for-code-exchange-pkce).
 
 The user-facing API is fairly simple and resembles the REST endpoints:
 

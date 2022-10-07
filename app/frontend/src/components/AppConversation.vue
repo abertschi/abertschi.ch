@@ -52,7 +52,9 @@ export default defineComponent({
     window.addEventListener('click', this.skipTyping);
     window.addEventListener('touchstart', this.skipTyping);
     window.addEventListener("keypress", this.skipTypingKeyPress);
-    // window.addEventListener("touchend", (e)=> e.preventDefault());
+    // XXX: TODO: On mobile we still open a link if animation is skipped while touching at the link location
+    window.addEventListener("touchend", (e)=> e.preventDefault());
+
 
 
     this._setTypingAnimationDefault()
