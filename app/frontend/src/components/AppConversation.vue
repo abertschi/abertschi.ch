@@ -49,11 +49,20 @@ export default defineComponent({
       this.questionCtx = []
     })
 
+    window.addEventListener("touchstart", this.skipTyping);
     window.addEventListener('click', this.skipTyping);
-    window.addEventListener('touchstart', this.skipTyping);
     window.addEventListener("keypress", this.skipTypingKeyPress);
-    // XXX: TODO: On mobile we still open a link if animation is skipped while touching at the link location
-    // window.addEventListener("touchend", (e)=> e.preventDefault());
+
+    /*
+     * Workaround: On mobile we still open a link if animation
+     * is skipped while touching at the link location
+     */
+    window.addEventListener("touchend", (e) => {
+      let delta = Date.now() - this.touchStartTimeMs
+      if (delta < 200) {
+        e.preventDefault();
+      }
+    });
 
 
 
@@ -64,6 +73,7 @@ export default defineComponent({
 
   data() {
     return {
+      touchStartTimeMs: 0,
       inputTextPlaceholder: 'and more ...' as string,
       inputText: '' as string,
       rejectEnter: false,
@@ -213,6 +223,9 @@ export default defineComponent({
       }
     },
     skipTyping(e: Event) {
+      if (this.isTyping){
+        this.touchStartTimeMs = Date.now()
+      }
       if (!this.initialDialog) {
         if (this.isTyping) {
           this._setTypingAnimationQuick()
@@ -221,6 +234,7 @@ export default defineComponent({
         }
         return
       }
+
       e.stopPropagation();
       e.stopImmediatePropagation()
       this.clearHtmlData(ID_INTRO, true)
