@@ -5,11 +5,13 @@
 
     <div class='text-prefix'>$</div>
 
-    <textarea @keydown.enter.prevent="onTextEnter"
-              class='text-input'
-              id='user-input-text'
-              v-model="inputText"
-              :placeholder="inputTextPlaceholder"
+    <textarea
+        @keydown.enter.exact.prevent="onTextEnter"
+        class='text-input'
+        id='user-input-text'
+        v-model="inputText"
+        autocomplete="off"
+        :placeholder="inputTextPlaceholder"
     ></textarea>
   </div>
   <div class='text-bottom-margin'></div>
@@ -49,9 +51,34 @@ export default defineComponent({
       this.questionCtx = []
     })
 
+    /* skip animation on key or mouse events */
     window.addEventListener("touchstart", this.skipTyping);
     window.addEventListener('click', this.skipTyping);
     window.addEventListener("keypress", this.skipTypingKeyPress);
+
+    this._setTypingAnimationDefault()
+    // this._placeholderHintAnimation()
+    this.doTyping()
+
+    /*
+     * Workaround: On mobile android, we do not receive a key enter event
+     * when pressing enter if there is already text in the textarea.
+     * Two enter events in sequence are needed for action to happen.
+     */
+    {
+      let that = this
+      let el = document.getElementById(ID_TEXT_INPUT)!!
+
+      // eslint-disable-next-line no-unused-vars
+      el.addEventListener('keyup', function (e) {
+        let i = that.inputText || ''
+        if (i.length > 0) {
+          if (i.charAt(i.length - 1) == '\n') {
+            that.onTextEnter()
+          }
+        }
+      })
+    }
     /*
      * Workaround: On mobile we still open a link if animation
      * is skipped while touching at the link location
@@ -62,9 +89,6 @@ export default defineComponent({
         e.preventDefault();
       }
     });
-    this._setTypingAnimationDefault()
-    // this._placeholderHintAnimation()
-    this.doTyping()
   },
 
   data() {
@@ -214,12 +238,14 @@ export default defineComponent({
       waitChar = DEFAULT_WAIT_CHAR
     },
     skipTypingKeyPress(e: KeyboardEvent) {
-      if (e.key === "Enter") {
+      if ((e.key === "Enter" || e.keyCode == 13) && !e.shiftKey) {
         this.skipTyping(e)
+        e.preventDefault()
+        return false
       }
     },
     skipTyping(e: Event) {
-      if (this.isTyping){
+      if (this.isTyping) {
         this.touchStartTimeMs = Date.now()
       }
       if (!this.initialDialog) {
@@ -259,8 +285,8 @@ export default defineComponent({
       for (let i = 0; i < rx.length; i++) {
         if (rx[i].innerHTML == null) continue
         if (rx[i].innerHTML.indexOf('<span class="typing">|</span>') > -1) {
-          rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>',
-              '<span class="typing"></span>');
+          // rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>', '<span class="typing"></span>');
+          rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>', '');
         }
       }
     },
@@ -296,7 +322,6 @@ export default defineComponent({
       if (this.isTyping) {
         return
       }
-
       if (this.typingBuffer.length <= this.typingBufferIndex) {
         return
       }
@@ -328,10 +353,16 @@ export default defineComponent({
       document.getElementById(ID_TEXT_INPUT)!.focus()
     },
     typeRows(rows: Array<string>, save: boolean = true) {
-      rows.forEach(r => this.typingBuffer.push(r))
-      if (save) {
-        rows.forEach(r => this._addConversation(r))
-      }
+      rows.forEach(r => {
+        // XXX: We render empty messages as line breaks
+        if (r === '') {
+          r = '<br/>'
+        }
+        this.typingBuffer.push(r)
+        if (save) {
+          this._addConversation(r)
+        }
+      })
       this.doTyping()
     },
     _typeSingleRow(row: string, onDone: () => void) {
