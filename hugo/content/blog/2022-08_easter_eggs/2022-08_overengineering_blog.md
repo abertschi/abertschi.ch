@@ -102,7 +102,7 @@ implementation of an Easter egg from the rest of the server code.
 
 This small project has been fun to build. You can try it out at https://abertschi.ch. The source code is available on [GitHub](https://github.com/abertschi/abertschi.ch).
 
-I may add some GPT-J alike functionality in a later update. Until then, the Easter eggs are small riddles that show themselves in quotes and sentences. You can follow up with the riddle by asking specific questions until you find out what the riddle wants you to ask or do. 
+I may add some GPT-J alike functionality in a later update. Until then, the Easter eggs are small riddles that show themselves in quotes and sentences. You can follow up by asking specific questions until you find out what the riddle wants you to ask or do. 
 
 ```
 > Everything that follows, is a result of what you see here.  
