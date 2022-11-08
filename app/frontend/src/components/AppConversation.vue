@@ -262,6 +262,7 @@ export default defineComponent({
       this.clearHtmlData(ID_INTRO, true)
       this.stop = true;
       this.typingBufferIndex = this.typingBuffer.length
+      // XXX: Always show input
       // this.showInput = false
       this.isTyping = false
 
@@ -285,13 +286,11 @@ export default defineComponent({
       for (let i = 0; i < rx.length; i++) {
         if (rx[i].innerHTML == null) continue
         if (rx[i].innerHTML.indexOf('<span class="typing">|</span>') > -1) {
-          // rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>', '<span class="typing"></span>');
           rx[i].innerHTML = rx[i].innerHTML.replace('<span class="typing">|</span>', '');
         }
       }
     },
     _onTypingFinished() {
-      let init = this.initialDialog
       if (this.initialDialog) {
         let last = PersistenceService.getLastUsage();
         if (last != null) {
@@ -304,6 +303,7 @@ export default defineComponent({
           this._createAndInsertLi(ID_INTRO, this.conversation[i])
         }
       } else {
+        // XXX: Usability: Do not scroll to bottom
         // this._scrollToBottomOfPage()
       }
       this.initialDialog = false
@@ -312,9 +312,7 @@ export default defineComponent({
       let that = this
       setTimeout(() => {
         this.isTyping = false
-        if (!init) {
-          that._focusInput()
-        }
+        that._focusInput()
         that.doTyping()
       }, 500)
     },
@@ -326,6 +324,7 @@ export default defineComponent({
         return
       }
       this.isTyping = true
+      // XXX: Always show input
       // this.showInput = false
       this._removeTypingAnimation(ID_INTRO)
 
