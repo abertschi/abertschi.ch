@@ -2,12 +2,8 @@
 title = "projects"
 +++
 
-Here is a [sammelsurium](https://en.wiktionary.org/wiki/sammelsurium) of some of my open-source bits and bytes I tinkered with over the last years.
-
-```
-sammelsurium, noun
-- a hodgepodge, a jumble, a mix (of things without order), a mess
-```
+Here is a [sammelsurium](https://en.wiktionary.org/wiki/sammelsurium) of some of
+my open-source bits and bytes I tinkered with over the last years.
 
 - 2022: [water-me](https://github.com/abertschi/water-me): Plant watering without ads and tracking
 - 2022: [Evaluating the influence of compiler flags on fuzzing](https://github.com/abertschi/influence_compiler_flags_on_fuzzing) 
