@@ -2,8 +2,7 @@
 title = "projects"
 +++
 
-Here is a [sammelsurium](https://en.wiktionary.org/wiki/sammelsurium) of some of my
-projects and open-source bits and bytes I tinkered with over the last years.
+Here is a [sammelsurium](https://en.wiktionary.org/wiki/sammelsurium) of some of my open-source bits and bytes I tinkered with over the last years.
 
 ```
 sammelsurium, noun
