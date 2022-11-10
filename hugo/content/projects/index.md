@@ -38,7 +38,7 @@ sammelsurium, noun
 - 2016: [service-call-tracker](https://github.com/abertschi/service-call-tracker): Always-available test data for Java Enterprise
 - 2016: [memory-lane](https://github.com/abertschi/memory-lane): Share life stories with video (Hackzurich 2016)
 - 2016: [arquillian-extension-aspectj](https://github.com/abertschi/arquillian-extension-aspectj): A JBoss Arquillian extension for AspectJ
-- 2016: [omelette-sync](https://github.com/abertschi/arquillian-extension-aspectj): Encrypted cloud storage syncronization
+- 2016: [omelette-sync](https://github.com/abertschi/omelette-sync): Encrypted cloud storage syncronization
 - 2016: [stacktrace-unserialize](https://github.com/abertschi/stacktrace-unserialize): String to java.lang.Throwable
 - 2015: [sailfish-wlan-keyboard](https://github.com/abertschi/sailfish-wlan-keyboard): Easier typing on SailfishOS
 - 2015: [sailfish-reload](https://github.com/abertschi/sailfish-reload): Auto refresh feature for QML prototyping on SailfishOS
