@@ -18,8 +18,8 @@ my open-source projects I tinkered with over the last years. You find most of th
 - 2020: [advanced_os_2020](./aos-report.pdf): Attempt on an exo-kernel based OS based on Barrelfish
 - 2019: [beancd-lang](https://github.com/abertschi/beancd-lang): The Beancd Programming language
 - 2019: [userspace-threading](https://github.com/abertschi/userspace-threading): Toy x86-64 cooperative user space threading library
-- 2019: [Small patch](https://web.archive.org/save/https://github.com/stumpwm/stumpwm/pull/629) for remapped-keys in my favorite X11 window manager 
-- 2018: Patches for [Vita-Shell](https://web.archive.org/save/https://github.com/TheOfficialFloW/VitaShell/pull/487) to introduce bookmarks
+- 2019: [Small patch](https://github.com/stumpwm/stumpwm/pull/629) for remapped-keys in my favorite X11 window manager 
+- 2018: Patches for [Vita-Shell](https://github.com/TheOfficialFloW/VitaShell/pull/487) to introduce bookmarks
 - 2018: [E-Mine token generator](https://github.com/abertschi/e-mine-web): Create and deploy smart contracts with a simple API  
   2018: [Notiplay](https://github.com/abertschi/notiplay): Play youtube videos in background on Android (unfinished)
 - 2018: [sysequal](https://github.com/abertschi/sysequal): Launch Android's builtin Equalizer
