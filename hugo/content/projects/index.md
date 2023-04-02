@@ -3,7 +3,7 @@ title = "projects"
 +++
 
 Here is a [sammelsurium](https://en.wiktionary.org/wiki/sammelsurium) of some of
-my open-source projects I tinkered with over the last years. You find most of them on [Github](https://github.com/abertschi).
+my open-source projects I tinkered with over the last years. You find most of them on [GitHub](https://github.com/abertschi).
 
 - 2022: [water-me](https://github.com/abertschi/water-me): Plant watering without ads and tracking
 - 2022: [Evaluating the influence of compiler flags on fuzzing](https://github.com/abertschi/influence_compiler_flags_on_fuzzing) 
