@@ -53,7 +53,7 @@ jobs:
       with:
         sftp: true # optional
         host: ${{ secrets.server }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
-        port: 21 # optional, default is: 21
+        port: 5544 # optional, default is: 21
         username: ${{ secrets.username }}  # FTP username
         password: ${{ secrets.password }} # FTP password
         # remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }} # optional, remote path of your FTP server
