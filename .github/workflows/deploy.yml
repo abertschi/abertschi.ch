@@ -46,12 +46,19 @@ jobs:
         ls -al ./public/blog/
         git status
     
-    - name: deploy
+    
+    - name: FTP Deployer
+      uses: sand4rt/ftp-deployer@v1.7
       if: github.ref == 'refs/heads/master'
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
-      with:  
-        ftp-server: ${{ secrets.server }} 
-        ftp-username: ${{ secrets.username }} 
-        ftp-password: ${{ secrets.password }}
-        local-dir: public
-        git-ftp-args: --insecure
+      with:
+        sftp: true # optional
+        host: ${{ secrets.server }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
+        port: 21 # optional, default is: 21
+        username: ${{ secrets.username }}  # FTP username
+        password: ${{ secrets.password }} # FTP password
+        # remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }} # optional, remote path of your FTP server
+        local_folder: public
+        cleanup: false # optional, remove existing files inside FTP remote folder
+        include: '[]' # optional, e.g. '['dist']'
+        exclude: '[]' # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
+        passive: true # optional
