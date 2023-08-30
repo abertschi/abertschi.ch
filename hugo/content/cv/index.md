@@ -4,7 +4,7 @@ title = "cv"
 
 ## Education
 **M.Sc. Computer Science, ETH Zurich**   
-_2020 - now_    
+_2020 - 2023_    
 _Focus on Secure and Reliable Systems_
 
 **B.Sc. Computer Science, ETH Zurich**   
@@ -18,8 +18,12 @@ _Federal Diploma of Vocational Education and Training in Software Engineering_
 
 
 ## Work Experience
+**Scientific Engineer, ETH Zurich**  
+_Secure and Trustworhty Systems Group_  
+_Supervision: Prof. Dr. Shweta Shinde_
+
 **Student Research Assistant, ETH Zurich**  
-03/22 - now  
+03/22 - 07/23  
 _Chair of Structural Engineering, Concrete Structures and Bridge Design_    
 _Supervision: Dr. Marius Weber_  
 Working mainly on a Rhinoceros 3D plugin (computer aided design) in the field of finite
