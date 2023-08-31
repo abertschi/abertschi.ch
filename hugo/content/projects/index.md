@@ -21,7 +21,7 @@ my open-source projects I tinkered with over the last years. You find most of th
 - 2019: [Small patch](https://github.com/stumpwm/stumpwm/pull/629) for remapped-keys in my favorite X11 window manager 
 - 2018: Patches for [Vita-Shell](https://github.com/TheOfficialFloW/VitaShell/pull/487) to introduce bookmarks
 - 2018: [E-Mine token generator](https://github.com/abertschi/e-mine-web): Create and deploy smart contracts with a simple API  
-  2018: [Notiplay](https://github.com/abertschi/notiplay): Play youtube videos in background on Android (unfinished)
+- 2018: [Notiplay](https://github.com/abertschi/notiplay): Play youtube videos in background on Android (unfinished)
 - 2018: [sysequal](https://github.com/abertschi/sysequal): Launch Android's builtin Equalizer
 - 2018: setjmp: hand-knitted [try/catch toy mechanism](https://github.com/abertschi/setjmp) for c using setjmp.h
 - 2017: [toggle ninja](https://github.com/abertschi/toggle-ninja): Remote toggle features on Android (unfinished)
