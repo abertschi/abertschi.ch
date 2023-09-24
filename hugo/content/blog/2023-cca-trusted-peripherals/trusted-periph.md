@@ -62,7 +62,7 @@ integrating confidential PCIe-based accelerators into Arm CCA.
 ![cca](/blog/2023-cca-trusted-peripherals/fpga2.png)
 
 
-## Technical Report and Plots and Figures
+## Technical Report, Plots and Figures
 
 You may download the technical report here, I am planning to open source the
 artifacts later on.
