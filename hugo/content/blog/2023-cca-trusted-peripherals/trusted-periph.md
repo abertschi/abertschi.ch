@@ -105,6 +105,13 @@ realm of trusted computing through further research.
 Happy hacking and thanks for reading.  
 -- bean
 
+-------
+
+Update: 29. September 2023: I am thrilled to announce that our work on
+  _Protecting Accelerator Execution with Arm Confidential Computing Architecture_
+ will be included in the program of USENIX Security 2024.
+
+-------
 
 ![cca](/blog/2023-cca-trusted-peripherals/gpu-data.png)
 ![cca](/blog/2023-cca-trusted-peripherals/fpga-data.png)
