@@ -110,6 +110,8 @@ Happy hacking and thanks for reading.
 Update: 29. September 2023: I am thrilled to announce that our work on
   _Protecting Accelerator Execution with Arm Confidential Computing Architecture_
  will be included in the program of USENIX Security 2024.
+ 
+ https://arxiv.org/abs/2305.15986
 
 -------
 
