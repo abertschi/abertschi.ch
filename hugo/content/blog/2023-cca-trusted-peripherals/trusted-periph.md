@@ -112,6 +112,14 @@ Update: 29. September 2023: I am thrilled to announce that our work on
  will be included in the program of USENIX Security 2024.
  
  https://arxiv.org/abs/2305.15986
+ 
+   
+ Update: 27. October 2023: I prepared the research artifact for USENIX Security
+ artifact evaluation 2024 and open-sourced all the software components. We have
+ reproducible builds for benchmarks, Linux kernels, TFA, RMM, benchmarks and
+ escape mechanisms.
+ 
+ https://github.com/sectrs-acai
 
 -------
 
