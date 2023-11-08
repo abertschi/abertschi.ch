@@ -9,7 +9,7 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
  
-name: build-and-deploy
+name: build-and-deploy-hetzner
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
