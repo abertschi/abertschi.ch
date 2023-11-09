@@ -23,7 +23,6 @@ my open-source projects I tinkered with over the last years. You find most of th
 - 2018: Patches for [Vita-Shell](https://github.com/TheOfficialFloW/VitaShell/pull/487) to introduce bookmarks
 - 2018: [E-Mine token generator](https://github.com/abertschi/e-mine-web): Create and deploy smart contracts with a simple API  
 - 2018: setjmp: hand-knitted [try/catch toy mechanism](https://github.com/abertschi/setjmp) for c using setjmp.h
-- 2017: [flash-on-visit](https://github.com/abertschi/flash-on-visit): Get visual feedback on your website traffic
 - 2017: [ad-free](/blog/2022/building-adfree/): Modularized ad blocker for Android
 - 2017: [postcards](https://github.com/abertschi/postcards): A CLI client to send free postcards
 - 2017: [postcard_creator](https://github.com/abertschi/postcard_creator_wrapper): A REST client to send free postcards
