@@ -5,6 +5,7 @@ title = "projects"
 Here is a [sammelsurium](https://en.wiktionary.org/wiki/sammelsurium) of some of
 my open-source projects I tinkered with over the last years. You find most of them on [GitHub](https://github.com/abertschi).
 
+- 2023: [ACAI](/blog/2023/cca-trusted-periph/): Confidential PCIe Accelerators on Arm CCA
 - 2022: [water-me](https://github.com/abertschi/water-me): Plant watering without ads and tracking
 - 2022: [Evaluating the influence of compiler flags on fuzzing](https://github.com/abertschi/influence_compiler_flags_on_fuzzing) 
 - 2022: [StrucEngLib Plugin](https://github.com/kfmResearch-NumericsTeam/StrucEng_Library_Plug_in/tree/018f8e5e3be188d9f037126eaf4e8605973cc507): Rhinoceros 3D Plugin for Finite Element Analysis
@@ -21,10 +22,7 @@ my open-source projects I tinkered with over the last years. You find most of th
 - 2019: [Small patch](https://github.com/stumpwm/stumpwm/pull/629) for remapped-keys in my favorite X11 window manager 
 - 2018: Patches for [Vita-Shell](https://github.com/TheOfficialFloW/VitaShell/pull/487) to introduce bookmarks
 - 2018: [E-Mine token generator](https://github.com/abertschi/e-mine-web): Create and deploy smart contracts with a simple API  
-- 2018: [Notiplay](https://github.com/abertschi/notiplay): Play youtube videos in background on Android (unfinished)
-- 2018: [sysequal](https://github.com/abertschi/sysequal): Launch Android's builtin Equalizer
 - 2018: setjmp: hand-knitted [try/catch toy mechanism](https://github.com/abertschi/setjmp) for c using setjmp.h
-- 2017: [toggle ninja](https://github.com/abertschi/toggle-ninja): Remote toggle features on Android (unfinished)
 - 2017: [flash-on-visit](https://github.com/abertschi/flash-on-visit): Get visual feedback on your website traffic
 - 2017: [ad-free](/blog/2022/building-adfree/): Modularized ad blocker for Android
 - 2017: [postcards](https://github.com/abertschi/postcards): A CLI client to send free postcards
@@ -33,7 +31,6 @@ my open-source projects I tinkered with over the last years. You find most of th
 - 2016: [service-call-tracker](https://github.com/abertschi/service-call-tracker): Always-available test data for Java Enterprise
 - 2016: [memory-lane](https://github.com/abertschi/memory-lane): Share life stories with video (Hackzurich 2016)
 - 2016: [arquillian-extension-aspectj](https://github.com/abertschi/arquillian-extension-aspectj): A JBoss Arquillian extension for AspectJ
-- 2016: [omelette-sync](https://github.com/abertschi/omelette-sync): Encrypted cloud storage syncronization
 - 2016: [stacktrace-unserialize](https://github.com/abertschi/stacktrace-unserialize): String to java.lang.Throwable
 - 2015: [sailfish-wlan-keyboard](https://github.com/abertschi/sailfish-wlan-keyboard): Easier typing on SailfishOS
 - 2015: [sailfish-reload](https://github.com/abertschi/sailfish-reload): Auto refresh feature for QML prototyping on SailfishOS
