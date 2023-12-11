@@ -107,24 +107,48 @@ Happy hacking and thanks for reading.
 
 -------
 
-Update: 29. September 2023: I am thrilled to announce that our work on
+**Update: 29. September 2023:** I am thrilled to announce that our work on
   _Protecting Accelerator Execution with Arm Confidential Computing Architecture_
  will be included in the program of USENIX Security 2024.
  
  https://arxiv.org/abs/2305.15986
  
    
- Update: 27. October 2023: I prepared the research artifact for USENIX Security
+**Update: 27. October 2023:** I prepared the research artifact for USENIX Security
  artifact evaluation 2024 and open-sourced all the software components. We have
  reproducible builds for benchmarks, Linux kernels, TFA, RMM and
  escape mechanisms.
  
  https://github.com/sectrs-acai
-
+ 
+ **Update: 11. December 2023:** We got all requested badges (available and functional)
+ in the artifact evaluation process. The provided GitHub runner for Continuous Integration
+ served as a valuable resource to solve build-related challenges that may have arised
+ and helped the reviewer to build and evaluate ACAI's functionality claims.
+ 
+ I am happy to see that all 4 reviewers rated the artifact as:
+ 
+ _ArtMat: Well-developed software, fairly extensive documentation, reasonable software engineering, attention to usability._
+ 
+ ![acai-ratings](/blog/2023-cca-trusted-peripherals/acai-ae-rating.png)
+ 
+ This despite ACAI's complexity with
+ [16 git submodules](https://github.com/sectrs-acai/acai/blob/trusted-periph/master/.gitmodules), [3 hour artifact
+ build](https://web.archive.org/web/20231211165113/https://github.com/sectrs-acai/acai/actions/runs/6638554927/job/18035123635)
+ (100 GB temp. storage), and cross compilation of kernels, root file systems,
+ device drivers and firmware.
+ 
+<!-- [Usenix Security '24 Artifact Evaluation](/blog/2023-cca-trusted-peripherals/23-12-11b-acai_usenix_artifact_eval.pdf) -->
+ 
 -------
 
+
+_Plots and Figures_
+
 ![cca](/blog/2023-cca-trusted-peripherals/gpu-data.png)
+
 ![cca](/blog/2023-cca-trusted-peripherals/fpga-data.png)
+
 ![cca](/blog/2023-cca-trusted-peripherals/elsplit-data.png)
 
 ![cca](/blog/2023-cca-trusted-peripherals/escape.png)
