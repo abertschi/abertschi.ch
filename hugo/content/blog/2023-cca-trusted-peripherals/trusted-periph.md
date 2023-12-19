@@ -124,22 +124,23 @@ Happy hacking and thanks for reading.
  **Update: 11. December 2023:** We got all requested badges (available and functional)
  in the artifact evaluation process. The provided GitHub runner for Continuous Integration
  served as a valuable resource to solve build-related challenges that may have arised
- and helped the reviewer to build and evaluate ACAI's functionality claims.
+ and helped the reviewer to build and evaluate ACAI's functionality claims. 
  
  I am happy to see that all 4 reviewers rated the artifact as:
  
- _ArtMat: Well-developed software, fairly extensive documentation, reasonable software engineering, attention to usability._
+ _Well-developed software, fairly extensive documentation, reasonable software engineering, attention to usability._
  
- ![acai-ratings](/blog/2023-cca-trusted-peripherals/acai-ae-rating.png)
- 
+ <!-- [acai-ratings](/blog/2023-cca-trusted-peripherals/acai-ae-rating.png) -->
+
+
  This despite ACAI's complexity with
  [16 git submodules](https://github.com/sectrs-acai/acai/blob/trusted-periph/master/.gitmodules), [3 hour artifact
  build](https://web.archive.org/web/20231211165113/https://github.com/sectrs-acai/acai/actions/runs/6638554927/job/18035123635)
  (100 GB temp. storage), and cross compilation of kernels, root file systems,
  device drivers and firmware.
  
-<!-- [Usenix Security '24 Artifact Evaluation](/blog/2023-cca-trusted-peripherals/23-12-11b-acai_usenix_artifact_eval.pdf) -->
- 
+<!-- Document: [Usenix Security '24 Artifact Evaluation](/blog/2023-cca-trusted-peripherals/23-12-11b-acai_usenix_artifact_eval.pdf) -->
+
 -------
 
 
