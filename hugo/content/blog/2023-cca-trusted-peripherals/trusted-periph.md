@@ -139,7 +139,7 @@ Happy hacking and thanks for reading.
  (100 GB temp. storage), and cross compilation of kernels, root file systems,
  device drivers and firmware.
  
-<!-- Document: [Usenix Security '24 Artifact Evaluation](/blog/2023-cca-trusted-peripherals/23-12-11b-acai_usenix_artifact_eval.pdf) -->
+Document: [Usenix Security '24 Artifact Evaluation](/blog/2023-cca-trusted-peripherals/23-12-11b-acai_usenix_artifact_eval.pdf)
 
 -------
 
