@@ -17,9 +17,20 @@ _2010 - 2014_
 _Federal Diploma of Vocational Education and Training in Software Engineering_
 
 ## Research
+- __WeSee: Using Malicious #VC Interrupts to Break AMD SEV-SNP__  
+*Benedict Schlüter, Supraja Sridhara, **Andrin Bertschi**, Shweta Shinde*  
+ IEEE Security and Privacy 2024  
+[[paper]](/cv/wesee_oakland24.pdf) [[arXiv]](https://arxiv.org/abs/2404.03526) [[website]](https://ahoi-attacks.github.io/)
+
+
+- __Heckler: Breaking Confidential VMs with Malicious Interrupts__  
+*Benedict Schlüter, Supraja Sridhara, Mark Kuhne, **Andrin Bertschi**, Shweta Shinde*
+USENIX Security 2024  
+[[paper]](/cv/heckler_usenix24.pdf) [[arXiv]](https://arxiv.org/abs/2404.03387) [[website]](https://ahoi-attacks.github.io/)
+
 - __ACAI: Protecting Accelerator Execution with Arm Confidential Computing Architecture__  
 *Supraja Sridhara, **Andrin Bertschi**, Benedict Schlüter, Mark Kuhne, Fabio Aliberti, Shweta Shinde*  
-USENIX Security Symposium (USENIX Security 2024)  
+USENIX Security 2024  
 [[paper]](/cv/acai_usenix24.pdf) [[arXiv]](https://arxiv.org/abs/2305.15986) [[source code]](https://github.com/sectrs-acai) [[bibtex]](https://dblp.org/rec/journals/corr/abs-2305-15986.html?view=bibtex)
 
 - __Protecting Accelerator Execution with Arm Confidential Computing Architecture__  
@@ -31,9 +42,10 @@ Bachelor Thesis, ETH Zurich
 
 
 ## Work Experience
-- **Scientific Engineer, ETH Zurich**  
+- **Research Engineer, ETH Zurich**  
 _Secure and Trustworhty Systems Group_  
-_Supervision: Prof. Dr. Shweta Shinde_
+_Supervision: Prof. Dr. Shweta Shinde_  
+Cloud and Mobile Virtualization Security
 
 - **Student Research Assistant, ETH Zurich**  
 03/22 - 07/23  
