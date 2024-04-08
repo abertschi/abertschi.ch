@@ -24,7 +24,7 @@ _Federal Diploma of Vocational Education and Training in Software Engineering_
 
 
 - __Heckler: Breaking Confidential VMs with Malicious Interrupts__  
-*Benedict Schlüter, Supraja Sridhara, Mark Kuhne, **Andrin Bertschi**, Shweta Shinde*
+*Benedict Schlüter, Supraja Sridhara, Mark Kuhne, **Andrin Bertschi**, Shweta Shinde*  
 USENIX Security 2024  
 [[paper]](/cv/heckler_usenix24.pdf) [[arXiv]](https://arxiv.org/abs/2404.03387) [[website]](https://ahoi-attacks.github.io/)
 
