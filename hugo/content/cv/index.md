@@ -17,6 +17,11 @@ _2010 - 2014_
 _Federal Diploma of Vocational Education and Training in Software Engineering_
 
 ## Research
+- __Sigy: Breaking Intel SGX Enclaves with Malicious Exceptions & Signals__  
+*Supraja Sridhara, **Andrin Bertschi**, Benedict Schlüter, Shweta Shinde*  
+[[arXiv]](https://arxiv.org/abs/2404.13998)
+
+
 - __WeSee: Using Malicious #VC Interrupts to Break AMD SEV-SNP__  
 *Benedict Schlüter, Supraja Sridhara, **Andrin Bertschi**, Shweta Shinde*  
  IEEE Security and Privacy 2024  
