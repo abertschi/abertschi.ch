@@ -21,7 +21,7 @@ title = "research"
 - __WeSee: Using Malicious #VC Interrupts to Break AMD SEV-SNP__  
 *Benedict Schlüter, Supraja Sridhara, **Andrin Bertschi**, Shweta Shinde*  
  IEEE Security and Privacy 2024, Distinguished Paper Award  
-[[paper]](/cv/wesee_oakland24.pdf) [[arXiv]](https://arxiv.org/abs/2404.03526) [[website]](https://ahoi-attacks.github.io/)
+[[paper]](/cv/wesee_oakland24.pdf) [[video]](https://www.youtube.com/watch?v=dCaUoYaAq5U) [[arXiv]](https://arxiv.org/abs/2404.03526) [[website]](https://ahoi-attacks.github.io/)
 
 
 - __Heckler: Breaking Confidential VMs with Malicious Interrupts__  
