@@ -13,8 +13,8 @@ my open-source projects (personal + research) I tinkered with over the last year
 - 2022: [4d holographic tutorials](https://github.com/abertschi/4d-holographic-tutorials) on Microsoft Hololens
 - 2022: [laptop_sync](https://github.com/abertschi/laptop_sync): Battery-friendly rsync for laptops
 - 2022: [Syncopoli](https://web.archive.org/save/https://gitlab.com/fengshaun/syncopoli/-/merge_requests/23):  Patches for rsync on Android
-- 2021: [3D Human Pose Estimation from RGB Images](./machine-perception-2021-report.pdf)
-- 2021: [Optimizing relational queries over a bit-parallel database layout](./db_intrinsics_report.pdf)
+<!-- - 2021: [3D Human Pose Estimation from RGB Images](./machine-perception-2021-report.pdf) -->
+<!-- - 2021: [Optimizing relational queries over a bit-parallel database layout](./db_intrinsics_report.pdf) -->
 - 2020: [graalphp](/blog/2020/building-graalphp/): Efficient PHP implementation built on GraalVM
 - 2020: Dependency free Eclipse [PDT PHP Parser for PHP 7](https://github.com/abertschi/graalphp/tree/master/graalphp-parser)
 - 2020: [advanced_os_2020](./aos-report.pdf): Attempt on an exo-kernel based OS based on Barrelfish
