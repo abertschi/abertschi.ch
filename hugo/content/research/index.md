@@ -3,10 +3,13 @@ title = "research"
 +++
 
 ## Research
+- __OpenCCA: An Open Framework to Enable Arm CCA Research__  
+***Andrin Bertschi\***, Shweta Shinde*  
+Workshop on System Software for Trusted Execution (SysTEX 2025)
+
 - __Devlore: Extending Arm CCA to Integrated Devices A Journey Beyond Memory to Interrupt Isolation__  
 ***Andrin Bertschi\***, Supraja Sridhara\*, Friederike Groschupp, Mark Kuhne, Benedict Schlüter, Clément Thorens, Nicolas Dutly, Srdjan Capkun, Shweta Shinde*  
 [[arXiv]](https://www.arxiv.org/abs/2408.05835)
-
 
 - __Aster: Fixing the Android TEE Ecosystem with Arm CCA__  
 *Mark Kuhne, Supraja Sridhara, **Andrin Bertschi**, Nicolas Dutly, Srdjan Capkun, Shweta Shinde*  
@@ -14,8 +17,9 @@ title = "research"
 
 
 - __Sigy: Breaking Intel SGX Enclaves with Malicious Exceptions & Signals__  
-*Supraja Sridhara, **Andrin Bertschi**, Benedict Schlüter, Shweta Shinde*  
-[[arXiv]](https://arxiv.org/abs/2404.13998)
+*Supraja Sridhara, **Andrin Bertschi**, Benedict Schlüter, Shweta Shinde*
+ACM ASIA Conference on Computer and Communications Security (ASIACCS 2025)  
+[[arXiv]](https://arxiv.org/abs/2404.13998) [[website]](https://ahoi-attacks.github.io/)
 
 
 - __WeSee: Using Malicious #VC Interrupts to Break AMD SEV-SNP__  
