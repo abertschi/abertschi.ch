@@ -17,7 +17,7 @@ Workshop on System Software for Trusted Execution (SysTEX 2025)
 
 
 - __Sigy: Breaking Intel SGX Enclaves with Malicious Exceptions & Signals__  
-*Supraja Sridhara, **Andrin Bertschi**, Benedict Schlüter, Shweta Shinde*
+*Supraja Sridhara, **Andrin Bertschi**, Benedict Schlüter, Shweta Shinde*  
 ACM ASIA Conference on Computer and Communications Security (ASIACCS 2025)  
 [[arXiv]](https://arxiv.org/abs/2404.13998) [[website]](https://ahoi-attacks.github.io/)
 
