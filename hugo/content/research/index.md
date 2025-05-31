@@ -33,7 +33,7 @@ ACM ASIA Conference on Computer and Communications Security (ASIACCS 2025)
 - __Heckler: Breaking Confidential VMs with Malicious Interrupts__  
 *Benedict Schlüter, Supraja Sridhara, Mark Kuhne, **Andrin Bertschi**, Shweta Shinde*  
 USENIX Security 2024  
-[[paper]](/cv/heckler_usenix24.pdf) [[arXiv]](https://arxiv.org/abs/2404.03387) [[website]](https://ahoi-attacks.github.io/)
+[[paper]](/cv/heckler_usenix24.pdf) [[arXiv]](https://arxiv.org/abs/2404.03387) [[source code]](https://github.com/ahoi-attacks/heckler) [[website]](https://ahoi-attacks.github.io/)
 
 - __ACAI: Protecting Accelerator Execution with Arm Confidential Computing Architecture__  
 *Supraja Sridhara, **Andrin Bertschi**, Benedict Schlüter, Mark Kuhne, Fabio Aliberti, Shweta Shinde*  
