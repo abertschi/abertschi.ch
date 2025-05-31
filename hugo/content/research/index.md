@@ -4,7 +4,7 @@ title = "research"
 
 ## Research
 - __OpenCCA: An Open Framework to Enable Arm CCA Research__  
-***Andrin Bertschi\***, Shweta Shinde*  
+***Andrin Bertschi**, Shweta Shinde*  
 Workshop on System Software for Trusted Execution (SysTEX 2025)
 
 - __Devlore: Extending Arm CCA to Integrated Devices A Journey Beyond Memory to Interrupt Isolation__  
