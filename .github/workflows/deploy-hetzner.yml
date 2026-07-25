@@ -48,7 +48,7 @@ jobs:
     
     
     - name: FTP Deployer
-      uses: sand4rt/ftp-deployer@v1.7
+      uses: sand4rt/ftp-deployer@v1.10
       if: github.ref == 'refs/heads/master'
       with:
         sftp: true # optional
