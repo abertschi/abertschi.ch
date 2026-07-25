@@ -25,4 +25,12 @@ webapp/develop:
 	npm --prefix "$(PROJ_ROOT)/app/frontend" run serve &
 
 
-.PHONY:
+academic/develop:
+	kill -9 "$(lsof -ti TCP:8000)" || true
+	python -m http.server --directory "$(PROJ_ROOT)/academic" 8000 &
+
+
+serve-build: build
+	kill -9 "$(lsof -ti TCP:8080)" || true
+	python -m http.server --directory "$(PROJ_ROOT)/public" 8080 &
+

@@ -1,0 +1,7 @@
+{{ define "main" }}
+  {{ with resources.Get "generated/index.gen.html" }}
+    {{ .Content | safeHTML }}
+  {{ else }}
+    {{ errorf "Missing assets/generated/index.gen.html" }}
+  {{ end }}
+{{ end }}
