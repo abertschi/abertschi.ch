@@ -15,7 +15,11 @@ Old structure (stored in branch old-layout)
 ```text
 /          -> custom webapp
 /research/ -> Hugo research page
+/cv/*      -> some old research files
 ```
+
+There are some old links that point to `/cv/{acai_usenix24.pdf, heckler_usenix24.pdf, weesee_oakland24.pdf}`.
+This is why we copy them to ./static/research/ as well as ./static/cv.
 
 New structure:
 
@@ -33,3 +37,5 @@ Changes:
 * Existing pages and static files keep their original URLs.
 * The old `/research/` page is replaced with an HTML redirect to `/`.
 * Existing research PDFs are moved to `static/research/` so their URLs remain valid.
+
+
