@@ -56,11 +56,6 @@ jobs:
       env:
         DEPLOY_HOST: ${{ secrets.HSERVER }}
       run: |
-        test -n "$HSERVER" || {
-          echo "HSERVER secret is missing"
-          exit 1
-        }
-    
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
         ssh-keyscan -H -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
