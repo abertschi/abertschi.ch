@@ -54,10 +54,10 @@ jobs:
     
     - name: Configure SSH host key
       env:
-        DEPLOY_HOST: ${{ secrets.FTP_HOST }}
+        DEPLOY_HOST: ${{ secrets.HSERVER }}
       run: |
-        test -n "$DEPLOY_HOST" || {
-          echo "FTP_HOST secret is missing"
+        test -n "$HSERVER" || {
+          echo "HSERVER secret is missing"
           exit 1
         }
     
@@ -68,9 +68,9 @@ jobs:
     - name: Deploy with rsync
       timeout-minutes: 10
       env:
-        SSHPASS: ${{ secrets.FTP_PASSWORD }}
-        DEPLOY_HOST: ${{ secrets.FTP_HOST }}
-        DEPLOY_USER: ${{ secrets.FTP_USERNAME }}
+        SSHPASS: ${{ secrets.HPASSWORD }}
+        DEPLOY_HOST: ${{ secrets.HSERVER }}
+        DEPLOY_USER: ${{ secrets.HUSERNAME }}
       run: |
         sshpass -e rsync \
           --archive \
