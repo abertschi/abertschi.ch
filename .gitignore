@@ -2,5 +2,6 @@ node_modules
 .idea
 /public
 hugo/layouts/index.gen.html
+hugo/assets/generated
 /hugo/content/blog/overengineering_blog_video.webm
 tmp

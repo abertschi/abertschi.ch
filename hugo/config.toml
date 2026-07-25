@@ -16,7 +16,7 @@ publishDir = "../public"
 
 ignoreFiles = ['\.ignore$', 'tmp$']
 
-disableKinds = ["taxonomy"]
+disableKinds = ["taxonomy", "home"]
 ignoreErrors = ["error-disable-taxonomy"]
 [permalinks]
   blog = "/blog/:year/:slug/"

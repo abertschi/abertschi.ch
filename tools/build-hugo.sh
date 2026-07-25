@@ -29,3 +29,33 @@ SITEMAP="<url><!-- what could this be.. --><loc>https://abertschi.ch/pdf</loc></
 OLD="</urlset>"
 NEW="${SITEMAP}${OLD}"
 sed -i "s#${OLD}#${NEW}#g" $FILE
+
+# copy acadmic website
+echo "Copying academic content to public folder"
+cp -a "$PROJ_ROOT/academic/." $PROJ_ROOT/public/
+
+# minify
+readonly MINIFY_VERSION=2.24.14
+readonly MINIFY_WRK="$SCRIPT_DIR/build/minify"
+readonly MINIFY_BIN="$MINIFY_WRK/minify"
+readonly MINIFY_DOWNLOAD="$MINIFY_WRK/minify.tar.gz"
+
+mkdir -p "$MINIFY_WRK"
+
+if [ ! -x "$MINIFY_BIN" ]; then
+    curl -fL \
+        "https://github.com/tdewolff/minify/releases/download/v${MINIFY_VERSION}/minify_linux_amd64.tar.gz" \
+        --output "$MINIFY_DOWNLOAD"
+
+    tar -xzf "$MINIFY_DOWNLOAD" -C "$MINIFY_WRK"
+    chmod +x "$MINIFY_BIN"
+fi
+
+TMP_INDEX=$(mktemp)
+trap 'rm -f "$TMP_INDEX"' EXIT
+
+"$MINIFY_BIN" \
+    --output "$TMP_INDEX" \
+    "$PROJ_ROOT/public/index.html"
+
+mv "$TMP_INDEX" "$PROJ_ROOT/public/index.html"
