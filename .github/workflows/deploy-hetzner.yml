@@ -47,18 +47,32 @@ jobs:
         git status
     
     
-    - name: FTP Deployer
-      uses: sand4rt/ftp-deployer@v1.10
-      if: github.ref == 'refs/heads/master'
-      with:
-        sftp: true # optional
-        host: ${{ secrets.hserver }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
-        port: 22 # optional, default is: 21
-        username: ${{ secrets.husername }}  # FTP username
-        password: ${{ secrets.hpassword }} # FTP password
-        remote_folder: '/public_html' # ${{ secrets.FTP_REMOTE_FOLDER }} # optional, remote path of your FTP server
-        local_folder: public
-        cleanup: false # optional, remove existing files inside FTP remote folder
-        include: '["*"]' # optional, e.g. '['dist']'
-        exclude: '[]' # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
-        passive: true # optional
+    - name: Install deployment tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y rsync sshpass
+    
+    - name: Configure SSH host key
+      env:
+        DEPLOY_HOST: ${{ secrets.FTP_HOST }}
+      run: |
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        ssh-keyscan -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+    
+    - name: Deploy with rsync
+      timeout-minutes: 10
+      env:
+        SSHPASS: ${{ secrets.FTP_PASSWORD }}
+        DEPLOY_HOST: ${{ secrets.FTP_HOST }}
+        DEPLOY_USER: ${{ secrets.FTP_USERNAME }}
+      run: |
+        sshpass -e rsync \
+          --archive \
+          --compress \
+          --itemize-changes \
+          --stats \
+          --human-readable \
+          -e "ssh -p 22" \
+          public/ \
+          "$DEPLOY_USER@$DEPLOY_HOST:/public_html/"
