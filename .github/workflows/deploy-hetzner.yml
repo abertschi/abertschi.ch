@@ -56,9 +56,14 @@ jobs:
       env:
         DEPLOY_HOST: ${{ secrets.FTP_HOST }}
       run: |
+        test -n "$DEPLOY_HOST" || {
+          echo "FTP_HOST secret is missing"
+          exit 1
+        }
+    
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
-        ssh-keyscan -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+        ssh-keyscan -H -p 22 "$DEPLOY_HOST" >> ~/.ssh/known_hosts
     
     - name: Deploy with rsync
       timeout-minutes: 10
