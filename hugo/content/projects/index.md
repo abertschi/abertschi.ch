@@ -5,6 +5,10 @@ title = "projects"
 Here is a [sammelsurium](https://en.wiktionary.org/wiki/sammelsurium) of some of
 my open-source projects (personal + research) I tinkered with over the last years. You find most of them on [GitHub](https://github.com/abertschi).
 
+- 2026: [track-tally](https://github.com/tracktally/challenge): A firestore shared counter for daily workout challenges
+- 2025: [homeassistant-techlife_pro](https://github.com/abertschi/homeassistant-techlife_pro): Homeassistant integration for cheap aliexpress Techlife bulbs
+- 2025: [opencca](https://github.com/opencca/opencca): Armv9 Arm CCA retrofitted to Armv8 for functionality.
+- 2025: [altbeacon-espresence](https://github.com/abertschi/android-altbeacon-espresence): Simple app that sends an AltBeacon proximity beacon advertisements
 - 2024: [Heckler](https://github.com/ahoi-attacks/heckler): SSH and sudo authentication bypass in SEV SNP Confidential VM
 - 2023: [ACAI](/blog/2023/cca-trusted-periph/): Confidential PCIe Accelerators on Arm CCA
 - 2022: [water-me](https://github.com/abertschi/water-me): Plant watering without ads and tracking
