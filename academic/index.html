@@ -150,6 +150,12 @@
   .news-date { flex: none; width: 105px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .news-text { flex: 1; min-width: 0; color: var(--muted); }
   .news-text strong { color: var(--fg); font-weight: 600; }
+  .news-text a {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--muted) 35%, transparent);
+    text-underline-offset: 2px;
+  }
+  .news-text a:hover, .news-text a:hover strong { color: var(--accent); text-decoration-color: var(--accent); }
 
   .mentee { display: flex; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 19px; }
   .mentee:last-child { border-bottom: none; }
@@ -245,7 +251,8 @@
     <div class="wrap">
       <div class="band-head"><h2>Recent News</h2></div>
       <div class="news-list">
-        <div class="news-row"><span class="news-date">2026/07</span><span class="news-text"><strong>Devlore</strong> is accepted at RAID 2026.</span></div>
+        <div class="news-row"><span class="news-date">2026/10</span><span class="news-text">I presented <a href="https://sectrs-devlore.github.io/"><strong>Devlore</strong></a> at RAID 2026.</span></div>
+        <!-- <div class="news-row"><span class="news-date">2026/07</span><span class="news-text"><strong>Devlore</strong> is accepted at RAID 2026.</span></div> -->
         <div class="news-row"><span class="news-date">2026/05</span><span class="news-text"><strong>Aster</strong> is accepted at MobiSys 2026.</span></div>
         <div class="news-row"><span class="news-date">2026/03</span><span class="news-text">I presented an overview of <strong>OpenCCA</strong> at OC3'26.</span></div>
         <div class="news-row"><span class="news-date">2025/08</span><span class="news-text"><strong>Sigy</strong> is accepted at ASIACCS 2025.</span></div>
@@ -260,6 +267,7 @@
       <div class="band-head"><h2>Links</h2></div>
       <div class="text-links">
         <a href="https://opencca.github.io">OpenCCA</a>
+        <a href="https://sectrs-devlore.github.io/">Devlore</a>
         <a href="https://github.com/sectrs-acai/acai">ACAI</a>
         <a href="https://aster-cca.github.io/">Aster</a>
         <a href="https://github.com/ahoi-attacks/heckler">Heckler</a>
@@ -277,7 +285,7 @@
 
         <div class="pub">
           <p class="pub-title">Devlore: Device Interrupt Protection for Confidential VMs</p>
-          <p class="pub-venue">To Appear in RAID 2026</p>
+          <p class="pub-venue">RAID 2026</p>
           <p class="pub-authors"><strong>Andrin Bertschi</strong>*, Supraja Sridhara*, Friederike Groschupp, Mark Kuhne, Benedict Schl&uuml;ter, Cl&eacute;ment Thorens, Nicolas Dutly, Srdjan Capkun, Shweta Shinde</p>
           <div class="pub-links">
             <a href="/papers/devlore_raid26.pdf">Paper</a>
